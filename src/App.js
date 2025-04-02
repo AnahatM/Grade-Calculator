@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
 import PointBasedClass from "./components/PointBasedClass";
 import CategoryWeightedClass from "./components/CategoryWeightedClass";
-import PredictNextGrade from "./components/PredictNextGrade";
 import GradeScale from "./components/GradeScale";
 
 function App() {
