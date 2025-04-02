@@ -1,4 +1,6 @@
-/* :root {
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap");
+
+:root {
   --background-color: #9bb0d6;
   --text-color: #000000;
 }
@@ -9,97 +11,18 @@
 }
 
 body {
-  background-color: var(--background-color);
+  background: var(--background-color);
   color: var(--text-color);
-  margin: 0;
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  font-family: "DM Sans", sans-serif;
+  font-size: 16px;
 }
 
-.App {
-  width: 90%;
-  max-width: 90vw;
-  border: 1px solid var(--text-color);
-  border-radius: 8px;
-  padding: 20px;
-  background-color: var(--background-color);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "DM Serif Display", serif;
+  font-weight: 600;
 }
-
-.App-header {
-  text-align: center;
-  margin-bottom: 20px;
-  padding: 5px 0;
-  border-bottom: 1px solid var(--text-color);
-}
-
-main {
-  margin-top: 10px;
-}
-
-main > div {
-  margin-bottom: 20px;
-  padding: 10px;
-  border: 1px solid var(--text-color);
-  border-radius: 4px;
-}
-
-.tabs {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.tabs button {
-  padding: 5px 10px;
-  border: 1px solid var(--text-color);
-  border-radius: 4px;
-  background-color: transparent;
-  color: var(--text-color);
-  cursor: pointer;
-}
-
-.tabs button.active {
-  background-color: var(--text-color);
-  color: var(--background-color);
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-}
-
-table th,
-table td {
-  border: 1px solid var(--text-color);
-  padding: 8px;
-  text-align: center;
-}
-
-table th {
-  background-color: var(--text-color);
-  color: var(--background-color);
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
-button {
-  cursor: pointer;
-  padding: 5px 10px;
-  border: 1px solid var(--text-color);
-  border-radius: 4px;
-  background-color: transparent;
-  color: var(--text-color);
-}
-
-button:hover {
-  background-color: var(--text-color);
-  color: var(--background-color);
-} */
