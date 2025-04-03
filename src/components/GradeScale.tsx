@@ -12,9 +12,9 @@ export default function GradeScale({
   };
 
   return (
-    <div>
-      <h3>Letter Grade Conversion Table</h3>
-      <table>
+    <div className="grade-scale neuromorphic table-container">
+      <h2>Letter Grades</h2>
+      <table className="neuromorphic">
         <thead>
           <tr>
             <th>Grade</th>
@@ -24,8 +24,8 @@ export default function GradeScale({
         <tbody>
           {Object.entries(gradeScale).map(([grade, percentage]) => (
             <tr key={grade}>
-              <td>{grade}</td>
-              <td>
+              <td style={{ width: "50%" }}>{grade}</td>
+              <td style={{ width: "50%" }}>
                 <input
                   type="number"
                   value={percentage}
@@ -36,9 +36,11 @@ export default function GradeScale({
           ))}
         </tbody>
       </table>
-      <p>
-        Adjust the thresholds for finer grades like A+, A, A-, B+, etc., by
-        modifying the values in the table above.
+      <p
+        className="neuromorphic"
+        style={{ marginTop: "20px", marginBottom: "10px" }}
+      >
+        You can adjust the above thresholds for letter grades.
       </p>
     </div>
   );

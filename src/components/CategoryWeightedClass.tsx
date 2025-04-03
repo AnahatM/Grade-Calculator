@@ -120,7 +120,6 @@ export default function CategoryWeightedClass({
 
       {/* Categories Section */}
       <div style={{ marginTop: "20px", marginBottom: "20px" }}>
-        <h4>Categories</h4>
         <table className="neuromorphic">
           <thead>
             <tr>

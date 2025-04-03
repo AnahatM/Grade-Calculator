@@ -38,7 +38,7 @@ nav header h1 {
   margin-bottom: 0;
 
   font-size: 24pt;
-  color: var(--inverse-primary-color);
+  color: var(--text-color);
 }
 
 nav header p {
@@ -56,6 +56,18 @@ nav button {
   background: var(--primary-color);
   color: var(--inverse-primary-color);
   font-size: 12pt;
+  cursor: pointer;
+}
+
+nav .nav-link {
+  padding: 5px 10px;
+  border-radius: 25px;
+
+  background: var(--primary-color);
+  color: var(--inverse-primary-color);
+  font-size: 12pt;
+  margin: 0 5px;
+  text-decoration: none;
 }
 
 /* Add Class Section */
@@ -181,6 +193,7 @@ nav button {
   text-decoration: underline;
   border-radius: 5px;
   background: transparent;
+  color: var(--text-color);
 }
 
 .table-container p {
@@ -248,4 +261,21 @@ nav button {
   margin: 5px 0;
   width: fit-content;
   margin-bottom: 15px;
+}
+
+/* Backup-Restore and Grade-Scale Sections */
+.backup-restore,
+.grade-scale {
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.backup-restore button,
+.grade-scale input {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.backup-restore input {
+  padding: 5px 10px;
 }

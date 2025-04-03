@@ -51,7 +51,10 @@ export default function PredictNextGrade({
     calculatePredictedGrade() || {};
 
   return (
-    <div className="predict-next-grade neuromorphic">
+    <div
+      className="predict-next-grade neuromorphic"
+      style={{ marginBottom: "20px" }}
+    >
       {/* Total Points */}
       <h2>Predict Your Next Grade</h2>
       <div className="total-points">

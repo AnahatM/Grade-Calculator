@@ -35,10 +35,21 @@ export default function BackupRestore({ setClasses }: BackupRestoreProps) {
   };
 
   return (
-    <div>
-      <h2>Backup and Restore</h2>
-      <button onClick={exportData}>Export Data</button>
-      <input type="file" accept="application/json" onChange={importData} />
+    <div className="backup-restore neuromorphic">
+      <h2>Save and Load</h2>
+      <button
+        className="neuromorphic"
+        style={{ padding: "5px 10px" }}
+        onClick={exportData}
+      >
+        Export Data
+      </button>
+      <input
+        type="file"
+        accept="application/json"
+        onChange={importData}
+        className="neuromorphic-inset"
+      />
     </div>
   );
 }
