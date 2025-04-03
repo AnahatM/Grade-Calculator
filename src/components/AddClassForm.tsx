@@ -17,24 +17,28 @@ export default function AddClassForm({ addClass }: AddClassFormProps) {
   };
 
   return (
-    <div>
+    <div className="add-class-form neuromorphic">
       <h2>Add a New Class</h2>
       <input
         type="text"
         placeholder="Class Name"
         value={newClassName}
         onChange={(e) => setNewClassName(e.target.value)}
+        className="neuromorphic-inset"
       />
       <select
         value={newClassType}
         onChange={(e) =>
           setNewClassType(e.target.value as "point-based" | "category-weighted")
         }
+        className="neuromorphic"
       >
         <option value="point-based">Point-Based</option>
         <option value="category-weighted">Category-Weighted</option>
       </select>
-      <button onClick={handleAddClass}>Add Class</button>
+      <button onClick={handleAddClass} className="neuromorphic">
+        Add Class
+      </button>
     </div>
   );
 }

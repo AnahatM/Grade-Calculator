@@ -2,14 +2,22 @@
 
 :root {
   --background-color: #c1c3c7;
+  --shadow-light-color: #d6d6d6;
+  --shadow-dark-color: #9398a1;
   --text-color: #181b2a;
   --primary-color: #ffffff;
+  --inverse-primary-color: #181b2a;
+  --accent-color: #969696;
 }
 
 [data-theme="dark"] {
   --background-color: #181b2a;
+  --shadow-light-color: #25293b;
+  --shadow-dark-color: #0e101a;
   --text-color: #dcdfe4;
   --primary-color: #ffffff;
+  --inverse-primary-color: #181b2a;
+  --accent-color: #575757;
 }
 
 * {
@@ -37,6 +45,8 @@ h3,
 h4,
 h5,
 h6 {
+  margin-bottom: 5px;
+
   font-family: "DM Serif Display", serif;
   font-weight: 600;
 }

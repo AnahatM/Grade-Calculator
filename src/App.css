@@ -1,0 +1,78 @@
+.neuromorphic {
+  box-shadow: -5px -5px 10px var(--shadow-light-color),
+    5px 5px 10px var(--shadow-dark-color);
+  border-radius: 10px;
+}
+
+.neuromorphic-inset {
+  box-shadow: inset -5px -5px 10px var(--shadow-light-color),
+    inset 5px 5px 10px var(--shadow-dark-color);
+  border-radius: 10px;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.app main {
+  max-width: 600px;
+}
+
+/* Navbar Styling */
+nav {
+  width: 100%;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  background: var(--accent-color);
+  box-shadow: 0px 5px 10px var(--shadow-dark-color);
+}
+
+nav header h1 {
+  margin-bottom: 0;
+
+  font-size: 24pt;
+}
+
+nav header p {
+  margin-bottom: 5px;
+
+  font-size: 12pt;
+  font-style: italic;
+}
+
+nav button {
+  padding: 5px 10px;
+  border-radius: 25px;
+
+  background: var(--primary-color);
+  color: var(--inverse-primary-color);
+  font-size: 12pt;
+}
+
+/* Add Class Section */
+.add-class-form {
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.add-class-form input {
+  padding: 5px 10px;
+}
+
+.add-class-form select {
+  padding: 5px 10px;
+  margin-left: 10px;
+}
+
+.add-class-form button {
+  padding: 5px 10px;
+  margin-left: 10px;
+  background-color: var(--accent-color);
+}
