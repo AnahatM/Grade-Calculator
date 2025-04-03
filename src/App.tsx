@@ -1,18 +1,32 @@
-import React, { useState, useEffect } from "react";
-import PointBasedClass from "./components/PointBasedClass";
-import CategoryWeightedClass from "./components/CategoryWeightedClass";
-import GradeScale from "./components/GradeScale";
+import { useState, useEffect, ChangeEvent } from "react";
+import PointBasedClass from "./components/PointBasedClass.tsx";
+import CategoryWeightedClass from "./components/CategoryWeightedClass.tsx";
+import GradeScale from "./components/GradeScale.tsx";
 
-function App() {
-  const [theme, setTheme] = useState("light");
-  const [classes, setClasses] = useState(() => {
+import "./App.css";
+
+// Define types for class data and grade scale
+type ClassData = {
+  name: string;
+  type: "point-based" | "category-weighted";
+  data: any[]; // Replace `any` with a more specific type if possible
+  categories: any[]; // Replace `any` with a more specific type if possible
+};
+
+type GradeScale = Record<string, number>;
+
+export default function App() {
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [classes, setClasses] = useState<ClassData[]>(() => {
     const savedClasses = localStorage.getItem("classes");
-    return savedClasses ? JSON.parse(savedClasses) : [];
+    return savedClasses ? (JSON.parse(savedClasses) as ClassData[]) : [];
   });
-  const [newClassName, setNewClassName] = useState("");
-  const [newClassType, setNewClassType] = useState("point-based");
-  const [activeClassIndex, setActiveClassIndex] = useState(0);
-  const [gradeScale, setGradeScale] = useState({
+  const [newClassName, setNewClassName] = useState<string>("");
+  const [newClassType, setNewClassType] = useState<
+    "point-based" | "category-weighted"
+  >("point-based");
+  const [activeClassIndex, setActiveClassIndex] = useState<number>(0);
+  const [gradeScale, setGradeScale] = useState<GradeScale>({
     "A+": 97,
     A: 93,
     "A-": 90,
@@ -36,11 +50,11 @@ function App() {
     localStorage.setItem("classes", JSON.stringify(classes));
   }, [classes]);
 
-  const toggleTheme = () => {
+  const toggleTheme = (): void => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
 
-  const addClass = () => {
+  const addClass = (): void => {
     if (newClassName.trim() === "") return;
     setClasses([
       ...classes,
@@ -49,18 +63,18 @@ function App() {
     setNewClassName("");
   };
 
-  const switchClass = (index) => {
+  const switchClass = (index: number): void => {
     setActiveClassIndex(index);
   };
 
-  const updateClassData = (data) => {
+  const updateClassData = (data: Partial<ClassData>): void => {
     const updatedClasses = classes.map((cls, index) =>
       index === activeClassIndex ? { ...cls, ...data } : cls
     );
     setClasses(updatedClasses);
   };
 
-  const editClassName = (index) => {
+  const editClassName = (index: number): void => {
     const newName = prompt("Enter new class name:", classes[index].name);
     if (newName) {
       const updatedClasses = classes.map((cls, i) =>
@@ -70,7 +84,7 @@ function App() {
     }
   };
 
-  const deleteClass = (index) => {
+  const deleteClass = (index: number): void => {
     if (window.confirm("Are you sure you want to delete this class?")) {
       const updatedClasses = classes.filter((_, i) => i !== index);
       setClasses(updatedClasses);
@@ -80,7 +94,7 @@ function App() {
     }
   };
 
-  const exportData = () => {
+  const exportData = (): void => {
     const dataStr = JSON.stringify(classes, null, 2);
     const blob = new Blob([dataStr], { type: "application/json" });
     const url = URL.createObjectURL(blob);
@@ -91,13 +105,15 @@ function App() {
     URL.revokeObjectURL(url);
   };
 
-  const importData = (event) => {
-    const file = event.target.files[0];
+  const importData = (event: ChangeEvent<HTMLInputElement>): void => {
+    const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
         try {
-          const importedClasses = JSON.parse(e.target.result);
+          const importedClasses = JSON.parse(
+            e.target?.result as string
+          ) as ClassData[];
           setClasses(importedClasses);
         } catch (error) {
           alert("Invalid JSON file");
@@ -127,7 +143,11 @@ function App() {
           />
           <select
             value={newClassType}
-            onChange={(e) => setNewClassType(e.target.value)}
+            onChange={(e) =>
+              setNewClassType(
+                e.target.value as "point-based" | "category-weighted"
+              )
+            }
           >
             <option value="point-based">Point-Based</option>
             <option value="category-weighted">Category-Weighted</option>
@@ -185,5 +205,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

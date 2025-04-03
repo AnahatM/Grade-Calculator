@@ -1,14 +1,38 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
-function CategoryWeightedClass({ classData, updateClassData }) {
-  const [categories, setCategories] = useState(classData.categories || []);
-  const [rows, setRows] = useState(classData.data || []);
+type Category = {
+  name: string;
+  weight: number;
+};
+
+type Row = {
+  score: string;
+  total: string;
+  category: string;
+};
+
+type CategoryWeightedClassProps = {
+  classData: {
+    categories: Category[];
+    data: Row[];
+  };
+  updateClassData: (data: { categories: Category[]; data: Row[] }) => void;
+};
+
+export default function CategoryWeightedClass({
+  classData,
+  updateClassData,
+}: CategoryWeightedClassProps) {
+  const [categories, setCategories] = useState<Category[]>(
+    classData.categories || []
+  );
+  const [rows, setRows] = useState<Row[]>(classData.data || []);
 
   useEffect(() => {
     updateClassData({ categories, data: rows });
   }, [categories, rows, updateClassData]);
 
-  const parseWeight = (input) => {
+  const parseWeight = (input: string): number => {
     if (input.includes("%")) {
       return parseFloat(input) / 100;
     } else if (input.includes(".")) {
@@ -18,12 +42,12 @@ function CategoryWeightedClass({ classData, updateClassData }) {
     }
   };
 
-  const addCategory = (name, weight) => {
+  const addCategory = (name: string, weight: string): void => {
     const parsedWeight = parseWeight(weight);
     setCategories([...categories, { name, weight: parsedWeight * 100 }]);
   };
 
-  const editCategory = (index) => {
+  const editCategory = (index: number): void => {
     const newName = prompt("Enter new category name:", categories[index].name);
     const newWeight = prompt(
       "Enter new weight for the category (e.g., 25%, 0.25, or 25):",
@@ -40,28 +64,28 @@ function CategoryWeightedClass({ classData, updateClassData }) {
     }
   };
 
-  const deleteCategory = (index) => {
+  const deleteCategory = (index: number): void => {
     if (window.confirm("Are you sure you want to delete this category?")) {
       setCategories(categories.filter((_, i) => i !== index));
     }
   };
 
-  const addRow = () => {
+  const addRow = (): void => {
     setRows([...rows, { score: "", total: "", category: "" }]);
   };
 
-  const updateRow = (index, field, value) => {
+  const updateRow = (index: number, field: keyof Row, value: string): void => {
     const updatedRows = rows.map((row, i) =>
       i === index ? { ...row, [field]: value } : row
     );
     setRows(updatedRows);
   };
 
-  const deleteRow = (index) => {
+  const deleteRow = (index: number): void => {
     setRows(rows.filter((_, i) => i !== index));
   };
 
-  const calculateTotals = () => {
+  const calculateTotals = (): { overallPercentage: string } => {
     const totalWeightedScore = categories.reduce((sum, category) => {
       const categoryRows = rows.filter((row) => row.category === category.name);
       const totalScore = categoryRows.reduce(
@@ -99,8 +123,8 @@ function CategoryWeightedClass({ classData, updateClassData }) {
         <button
           onClick={() =>
             addCategory(
-              prompt("Category Name:"),
-              prompt("Weight (e.g., 25%, 0.25, or 25):")
+              prompt("Category Name:") || "",
+              prompt("Weight (e.g., 25%, 0.25, or 25):") || ""
             )
           }
         >
@@ -170,5 +194,3 @@ function CategoryWeightedClass({ classData, updateClassData }) {
     </div>
   );
 }
-
-export default CategoryWeightedClass;

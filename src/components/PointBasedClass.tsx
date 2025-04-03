@@ -1,41 +1,64 @@
-import React, { useState, useEffect } from "react";
-import PredictNextGrade from "./PredictNextGrade";
+import { useState, useEffect } from "react";
+import PredictNextGrade from "./PredictNextGrade.tsx";
 
-function PointBasedClass({ classData, updateClassData, gradeScale }) {
-  const [rows, setRows] = useState(classData.data || []);
+// Define types for props and rows
+type PointBasedClassProps = {
+  classData: {
+    data: { score: string; total: string }[];
+  };
+  updateClassData: (data: { data: { score: string; total: string }[] }) => void;
+  gradeScale: Record<string, number>;
+};
+
+export default function PointBasedClass({
+  classData,
+  updateClassData,
+  gradeScale,
+}: PointBasedClassProps) {
+  const [rows, setRows] = useState<{ score: string; total: string }[]>(
+    classData.data || []
+  );
 
   useEffect(() => {
     updateClassData({ data: rows });
   }, [rows, updateClassData]);
 
-  const addRow = () => {
+  const addRow = (): void => {
     setRows([...rows, { score: "", total: "" }]);
   };
 
-  const addTenRows = () => {
+  const addTenRows = (): void => {
     const newRows = Array(10).fill({ score: "", total: "" });
     setRows([...rows, ...newRows]);
   };
 
-  const updateRow = (index, field, value) => {
+  const updateRow = (
+    index: number,
+    field: "score" | "total",
+    value: string
+  ): void => {
     const updatedRows = rows.map((row, i) =>
       i === index ? { ...row, [field]: value } : row
     );
     setRows(updatedRows);
   };
 
-  const deleteRow = (index) => {
+  const deleteRow = (index: number): void => {
     setRows(rows.filter((_, i) => i !== index));
   };
 
-  const calculateTotals = () => {
+  const calculateTotals = (): {
+    totalScore: number;
+    totalMax: number;
+    percentage: number;
+  } => {
     const totalScore = rows.reduce(
       (sum, row) => sum + Number(row.score || 0),
       0
     );
     const totalMax = rows.reduce((sum, row) => sum + Number(row.total || 0), 0);
     const percentage =
-      totalMax > 0 ? ((totalScore / totalMax) * 100).toFixed(2) : 0;
+      totalMax > 0 ? parseFloat(((totalScore / totalMax) * 100).toFixed(2)) : 0;
     return { totalScore, totalMax, percentage };
   };
 
@@ -73,8 +96,8 @@ function PointBasedClass({ classData, updateClassData, gradeScale }) {
                 />
               </td>
               <td>
-                {row.total > 0
-                  ? ((row.score / row.total) * 100).toFixed(2)
+                {Number(row.total) > 0
+                  ? ((Number(row.score) / Number(row.total)) * 100).toFixed(2)
                   : "0.00"}
                 %
               </td>
@@ -100,5 +123,3 @@ function PointBasedClass({ classData, updateClassData, gradeScale }) {
     </div>
   );
 }
-
-export default PointBasedClass;

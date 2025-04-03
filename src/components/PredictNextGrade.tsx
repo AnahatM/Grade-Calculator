@@ -1,21 +1,39 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
-function PredictNextGrade({ totalScore, totalMax, gradeScale }) {
-  const [nextTotal, setNextTotal] = useState("");
-  const [desiredGrade, setDesiredGrade] = useState("");
-  const [predictedPoints, setPredictedPoints] = useState("");
+// Define types for props
+type PredictNextGradeProps = {
+  totalScore: number;
+  totalMax: number;
+  gradeScale: Record<string, number>;
+};
 
-  const calculateNeededScore = () => {
+export default function PredictNextGrade({
+  totalScore,
+  totalMax,
+  gradeScale,
+}: PredictNextGradeProps) {
+  const [nextTotal, setNextTotal] = useState<string>("");
+  const [desiredGrade, setDesiredGrade] = useState<string>("");
+  const [predictedPoints, setPredictedPoints] = useState<string>("");
+
+  // Calculate the score needed to achieve the desired grade
+  const calculateNeededScore = (): number | null => {
     if (!nextTotal || !desiredGrade) return null;
     const desiredPercentage = gradeScale[desiredGrade];
     if (desiredPercentage === undefined) return null;
 
     const neededScore =
       (desiredPercentage / 100) * (totalMax + Number(nextTotal)) - totalScore;
-    return Math.max(0, neededScore.toFixed(2));
+    return Math.max(0, parseFloat(neededScore.toFixed(2)));
   };
 
-  const calculatePredictedGrade = () => {
+  // Calculate the predicted grade based on entered points
+  const calculatePredictedGrade = (): {
+    predictedGrade: string;
+    newTotalScore: number;
+    newTotalMax: number;
+    newPercentage: number;
+  } | null => {
     if (!predictedPoints) return null;
     const newTotalScore = totalScore + Number(predictedPoints);
     const newTotalMax = totalMax + Number(nextTotal);
@@ -80,7 +98,7 @@ function PredictNextGrade({ totalScore, totalMax, gradeScale }) {
         {predictedGrade && (
           <p>
             Your grade will be {newTotalScore} points / {newTotalMax} points,
-            and your percentage grade will be {newPercentage.toFixed(2)}%.
+            and your percentage grade will be {newPercentage?.toFixed(2)}%.
           </p>
         )}
       </div>
@@ -98,5 +116,3 @@ function PredictNextGrade({ totalScore, totalMax, gradeScale }) {
     </div>
   );
 }
-
-export default PredictNextGrade;

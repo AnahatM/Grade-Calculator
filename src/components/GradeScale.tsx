@@ -1,7 +1,13 @@
-import React from "react";
+type GradeScaleProps = {
+  gradeScale: Record<string, number>;
+  setGradeScale: (newScale: Record<string, number>) => void;
+};
 
-function GradeScale({ gradeScale, setGradeScale }) {
-  const updateGrade = (grade, minPercentage) => {
+export default function GradeScale({
+  gradeScale,
+  setGradeScale,
+}: GradeScaleProps) {
+  const updateGrade = (grade: string, minPercentage: number): void => {
     setGradeScale({ ...gradeScale, [grade]: minPercentage });
   };
 
@@ -23,7 +29,7 @@ function GradeScale({ gradeScale, setGradeScale }) {
                 <input
                   type="number"
                   value={percentage}
-                  onChange={(e) => updateGrade(grade, e.target.value)}
+                  onChange={(e) => updateGrade(grade, Number(e.target.value))}
                 />
               </td>
             </tr>
@@ -37,5 +43,3 @@ function GradeScale({ gradeScale, setGradeScale }) {
     </div>
   );
 }
-
-export default GradeScale;
