@@ -1,14 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap");
 
 :root {
-  --background-color: #dcdfe4;
+  --background-color: #c1c3c7;
   --text-color: #181b2a;
-  --primary-color: #4a90e2;
+  --primary-color: #ffffff;
 }
 
 [data-theme="dark"] {
   --background-color: #181b2a;
   --text-color: #dcdfe4;
+  --primary-color: #ffffff;
 }
 
 * {
@@ -17,6 +18,8 @@
   padding: 0;
   border: none;
   outline: none;
+  background: none;
+  color: var(--text-color);
 }
 
 body {
@@ -24,6 +27,8 @@ body {
   color: var(--text-color);
   font-family: "DM Sans", sans-serif;
   font-size: 16px;
+  text-align: left;
+  text-decoration: none;
 }
 
 h1,
