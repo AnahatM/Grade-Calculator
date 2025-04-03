@@ -113,7 +113,10 @@ export default function PointBasedClass({
       <button className="neuromorphic" onClick={addTenRows}>
         Add 10 Rows
       </button>
-      <p className="neuromorphic">
+      <p
+        className="neuromorphic"
+        style={{ marginTop: "20px", marginBottom: "10px" }}
+      >
         Current Grade: {percentage}% // (
         {Object.entries(gradeScale).find(
           ([, minPercentage]) => (totalScore / totalMax) * 100 >= minPercentage

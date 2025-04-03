@@ -204,3 +204,48 @@ nav button {
   padding: 5px 10px;
   margin: 10px;
 }
+
+/* Category-Weighted Class Section */
+.category-weighted-class {
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.category-weighted-class ul {
+  padding: 10px;
+  margin: 10px 0;
+  list-style: none;
+}
+
+.category-weighted-class ul li {
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category-weighted-class ul li button {
+  padding: 2px 5px;
+  font-size: 8pt;
+  font-weight: lighter;
+  text-transform: uppercase;
+  text-decoration: underline;
+  border-radius: 5px;
+  background: transparent;
+}
+
+.category-weighted-class button {
+  padding: 5px 10px;
+  margin: 5px 0;
+  margin-right: 5px;
+  margin-bottom: 10px;
+  background-color: var(--accent-color);
+  color: var(--inverse-primary-color);
+}
+
+.category-weighted-class p {
+  padding: 5px 10px;
+  margin: 5px 0;
+  width: fit-content;
+  margin-bottom: 15px;
+}

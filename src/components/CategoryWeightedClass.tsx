@@ -106,21 +106,44 @@ export default function CategoryWeightedClass({
 
   const { overallPercentage } = calculateTotals();
 
+  const gradeScale: { [grade: string]: number } = {
+    A: 90,
+    B: 80,
+    C: 70,
+    D: 60,
+    F: 0,
+  };
+
   return (
-    <div className="table-container neuromorphic">
+    <div className="category-weighted-class table-container neuromorphic">
       <h2>Category-Weighted Class</h2>
-      <div>
+
+      {/* Categories Section */}
+      <div style={{ marginTop: "20px", marginBottom: "20px" }}>
         <h4>Categories</h4>
-        <ul>
-          {categories.map((cat, index) => (
-            <li key={index}>
-              {cat.name} - {cat.weight}%
-              <button onClick={() => editCategory(index)}>Edit</button>
-              <button onClick={() => deleteCategory(index)}>Delete</button>
-            </li>
-          ))}
-        </ul>
+        <table className="neuromorphic">
+          <thead>
+            <tr>
+              <th>Category Name</th>
+              <th>Weight (%)</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {categories.map((cat, index) => (
+              <tr key={index}>
+                <td>{cat.name}</td>
+                <td>{cat.weight}</td>
+                <td>
+                  <button onClick={() => editCategory(index)}>Edit</button>
+                  <button onClick={() => deleteCategory(index)}>Del</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
         <button
+          className="neuromorphic"
           onClick={() =>
             addCategory(
               prompt("Category Name:") || "",
@@ -131,10 +154,12 @@ export default function CategoryWeightedClass({
           Add Category
         </button>
       </div>
-      <table className="neuromorphic">
+
+      {/* Scores Table */}
+      <table className="table-container neuromorphic">
         <thead>
           <tr>
-            <th>#</th>
+            <th></th>
             <th>Score</th>
             <th>Total</th>
             <th>Category</th>
@@ -179,18 +204,34 @@ export default function CategoryWeightedClass({
           ))}
         </tbody>
       </table>
-      <button onClick={addRow}>Add Row</button>
-      <div>
-        <h4>Category Totals</h4>
-        <ul>
-          {categories.map((cat, index) => (
-            <li key={index}>
-              {cat.name}: {cat.weight}%
-            </li>
-          ))}
-        </ul>
-        <p>Overall Percentage: {overallPercentage}%</p>
-      </div>
+      <button className="neuromorphic" onClick={addRow}>
+        Add Row
+      </button>
+      <button
+        className="neuromorphic"
+        onClick={() => {
+          const newRows = Array(10).fill({
+            score: "",
+            total: "",
+            category: "",
+          });
+          setRows([...rows, ...newRows]);
+        }}
+      >
+        Add 10 Rows
+      </button>
+
+      {/* Current Grade Section */}
+      <p
+        className="neuromorphic"
+        style={{ marginTop: "20px", marginBottom: "10px" }}
+      >
+        Current Grade: {overallPercentage}% // (
+        {Object.entries(gradeScale).find(
+          ([, minPercentage]) => parseFloat(overallPercentage) >= minPercentage
+        )?.[0] || "F"}
+        )
+      </p>
     </div>
   );
 }
