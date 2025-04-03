@@ -61,5 +61,6 @@ export function useClasses() {
     updateClassData,
     editClassName,
     deleteClass,
+    setClasses,
   };
 }

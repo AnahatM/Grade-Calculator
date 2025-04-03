@@ -18,6 +18,7 @@ export default function App() {
     updateClassData,
     editClassName,
     deleteClass,
+    setClasses,
   } = useClasses();
 
   const gradeScale = {
@@ -68,7 +69,7 @@ export default function App() {
               )}
             </div>
           )}
-          <BackupRestore />
+          <BackupRestore setClasses={setClasses} />
           <GradeScale gradeScale={gradeScale} setGradeScale={() => {}} />
         </main>
       </div>

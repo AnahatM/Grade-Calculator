@@ -1,4 +1,8 @@
-export default function BackupRestore() {
+type BackupRestoreProps = {
+  setClasses: (classes: any[]) => void;
+};
+
+export default function BackupRestore({ setClasses }: BackupRestoreProps) {
   const exportData = () => {
     const dataStr = JSON.stringify([], null, 2); // Replace with actual data
     const blob = new Blob([dataStr], { type: "application/json" });
@@ -17,7 +21,11 @@ export default function BackupRestore() {
       reader.onload = (e) => {
         try {
           const importedClasses = JSON.parse(e.target?.result as string);
-          console.log(importedClasses); // Replace with actual logic
+          if (Array.isArray(importedClasses)) {
+            setClasses(importedClasses);
+          } else {
+            alert("Invalid JSON format: Expected an array of classes.");
+          }
         } catch (error) {
           alert("Invalid JSON file");
         }
