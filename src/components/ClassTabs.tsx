@@ -14,19 +14,27 @@ export default function ClassTabs({
   deleteClass,
 }: ClassTabsProps) {
   return (
-    <div>
+    <div className="class-tabs neuromorphic">
       <h2>Your Classes</h2>
-      <div className="tabs">
+      <div>
         {classes.map((cls, index) => (
-          <div key={index} style={{ display: "flex", alignItems: "center" }}>
+          <div
+            className="neuromorphic"
+            key={index}
+            style={{ display: "flex", alignItems: "center" }}
+          >
             <button
-              className={index === activeClassIndex ? "active" : ""}
+              className={`neuromorphic ${
+                index === activeClassIndex ? "active" : ""
+              }`}
               onClick={() => switchClass(index)}
             >
               {cls.name}
             </button>
-            <button onClick={() => editClassName(index)}>Edit</button>
-            <button onClick={() => deleteClass(index)}>Delete</button>
+            <span>
+              <button onClick={() => editClassName(index)}>Edit</button>
+              <button onClick={() => deleteClass(index)}>Delete</button>
+            </span>
           </div>
         ))}
       </div>

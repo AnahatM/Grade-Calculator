@@ -76,3 +76,57 @@ nav button {
   margin-left: 10px;
   background-color: var(--accent-color);
 }
+
+/* Class Tab Switcher */
+.class-tabs {
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.class-tabs div {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+  align-items: center;
+}
+
+.class-tabs div div {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.class-tabs div div button {
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 10pt;
+  width: 100%;
+  background: var(--primary-color);
+  transition: all 0.15s ease-out;
+
+  &:hover {
+    background: var(--accent-color);
+  }
+}
+
+.class-tabs div div button.active {
+  background-color: var(--accent-color);
+  color: var(--text-color);
+}
+
+.class-tabs div div span {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.class-tabs div div span button {
+  font-size: 8pt;
+  font-weight: lighter;
+  text-transform: uppercase;
+  color: var(--text-color);
+}
