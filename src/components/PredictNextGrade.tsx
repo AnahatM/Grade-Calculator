@@ -102,17 +102,6 @@ export default function PredictNextGrade({
           </p>
         )}
       </div>
-      <div>
-        <p>
-          Current Overall Percentage:{" "}
-          {((totalScore / totalMax) * 100).toFixed(2)}% (
-          {Object.entries(gradeScale).find(
-            ([, minPercentage]) =>
-              (totalScore / totalMax) * 100 >= minPercentage
-          )?.[0] || "F"}
-          )
-        </p>
-      </div>
     </div>
   );
 }

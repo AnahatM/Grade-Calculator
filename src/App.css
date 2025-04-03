@@ -181,3 +181,10 @@ nav button {
   border-radius: 5px;
   background: transparent;
 }
+
+.table-container p {
+  padding: 5px 10px;
+  margin: 5px 0;
+  width: fit-content;
+  margin-bottom: 15px;
+}

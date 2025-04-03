@@ -114,11 +114,13 @@ export default function PointBasedClass({
       <button className="neuromorphic" onClick={addTenRows}>
         Add 10 Rows
       </button>
-      <div>
-        <p>Total Score: {totalScore}</p>
-        <p>Total Max: {totalMax}</p>
-        <p>Overall Percentage: {percentage}%</p>
-      </div>
+      <p className="neuromorphic">
+        Current Grade: {percentage}% // (
+        {Object.entries(gradeScale).find(
+          ([, minPercentage]) => (totalScore / totalMax) * 100 >= minPercentage
+        )?.[0] || "F"}
+        ) // {totalScore}/{totalMax}
+      </p>
       <PredictNextGrade
         totalScore={totalScore}
         totalMax={totalMax}

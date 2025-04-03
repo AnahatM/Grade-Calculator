@@ -107,8 +107,8 @@ export default function CategoryWeightedClass({
   const { overallPercentage } = calculateTotals();
 
   return (
-    <div>
-      <h3>Category-Weighted Class</h3>
+    <div className="table-container neuromorphic">
+      <h2>Category-Weighted Class</h2>
       <div>
         <h4>Categories</h4>
         <ul>
@@ -131,14 +131,14 @@ export default function CategoryWeightedClass({
           Add Category
         </button>
       </div>
-      <table>
+      <table className="neuromorphic">
         <thead>
           <tr>
             <th>#</th>
             <th>Score</th>
             <th>Total</th>
             <th>Category</th>
-            <th>Actions</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -173,7 +173,7 @@ export default function CategoryWeightedClass({
                 </select>
               </td>
               <td>
-                <button onClick={() => deleteRow(index)}>Delete</button>
+                <button onClick={() => deleteRow(index)}>Del</button>
               </td>
             </tr>
           ))}
