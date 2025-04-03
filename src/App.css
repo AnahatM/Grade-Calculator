@@ -188,3 +188,18 @@ nav button {
   width: fit-content;
   margin-bottom: 15px;
 }
+
+/* Predict Next Grade Section */
+.predict-next-grade {
+  padding: 20px;
+}
+
+.predict-next-grade input {
+  padding: 5px 10px;
+  margin: 10px;
+}
+
+.predict-next-grade select {
+  padding: 5px 10px;
+  margin: 10px;
+}
