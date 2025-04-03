@@ -109,9 +109,13 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={toggleTheme}>
-        Switch to {theme === "light" ? "Dark" : "Light"} Theme
-      </button>
+      <nav>
+        <header>
+          <h1>Grade Calculator</h1>
+          <p>by Anahat Mudgal</p>
+        </header>
+        <button onClick={toggleTheme}>{theme === "light" ? "🌙" : "🌞"}</button>
+      </nav>
       <main>
         <div>
           <h2>Add a New Class</h2>
