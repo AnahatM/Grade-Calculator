@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import PredictNextGrade from "./PredictNextGrade.tsx";
 
 // Define types for props and rows
 type PointBasedClassProps = {
@@ -121,11 +120,6 @@ export default function PointBasedClass({
         )?.[0] || "F"}
         ) // {totalScore}/{totalMax}
       </p>
-      <PredictNextGrade
-        totalScore={totalScore}
-        totalMax={totalMax}
-        gradeScale={gradeScale}
-      />
     </div>
   );
 }

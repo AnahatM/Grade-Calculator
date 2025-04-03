@@ -5,6 +5,7 @@ import BackupRestore from "./components/BackupRestore.tsx";
 import PointBasedClass from "./components/PointBasedClass.tsx";
 import CategoryWeightedClass from "./components/CategoryWeightedClass";
 import GradeScale from "./components/GradeScale";
+import PredictNextGrade from "./components/PredictNextGrade.tsx";
 
 import "./App.css";
 import Header from "./components/Header.tsx";
@@ -37,6 +38,17 @@ export default function App() {
     F: 0,
   };
 
+  const { totalScore, totalMax } =
+    classes.length > 0 && classes[activeClassIndex].type === "point-based"
+      ? classes[activeClassIndex].data.reduce(
+          (totals, row) => ({
+            totalScore: totals.totalScore + Number(row.score || 0),
+            totalMax: totals.totalMax + Number(row.total || 0),
+          }),
+          { totalScore: 0, totalMax: 0 }
+        )
+      : { totalScore: 0, totalMax: 0 };
+
   return (
     <>
       <Header />
@@ -52,9 +64,6 @@ export default function App() {
           />
           {classes.length > 0 && (
             <div>
-              {/* <h3>Active Class: {classes[activeClassIndex].name}</h3>
-              <p>Type: {classes[activeClassIndex].type}</p> */}
-
               {classes[activeClassIndex].type === "point-based" && (
                 <PointBasedClass
                   classData={classes[activeClassIndex]}
@@ -70,6 +79,14 @@ export default function App() {
               )}
             </div>
           )}
+          {classes.length > 0 &&
+            classes[activeClassIndex].type === "point-based" && (
+              <PredictNextGrade
+                totalScore={totalScore}
+                totalMax={totalMax}
+                gradeScale={gradeScale}
+              />
+            )}
           <BackupRestore setClasses={setClasses} />
           <GradeScale gradeScale={gradeScale} setGradeScale={() => {}} />
         </main>
