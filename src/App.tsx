@@ -52,8 +52,9 @@ export default function App() {
           />
           {classes.length > 0 && (
             <div>
-              <h3>Active Class: {classes[activeClassIndex].name}</h3>
-              <p>Type: {classes[activeClassIndex].type}</p>
+              {/* <h3>Active Class: {classes[activeClassIndex].name}</h3>
+              <p>Type: {classes[activeClassIndex].type}</p> */}
+
               {classes[activeClassIndex].type === "point-based" && (
                 <PointBasedClass
                   classData={classes[activeClassIndex]}

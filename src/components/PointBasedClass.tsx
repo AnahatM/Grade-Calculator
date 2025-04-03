@@ -65,16 +65,16 @@ export default function PointBasedClass({
   const { totalScore, totalMax, percentage } = calculateTotals();
 
   return (
-    <div>
-      <h3>Point-Based Class</h3>
-      <table>
+    <div className="table-container neuromorphic">
+      <h2>Point-Based Class</h2>
+      <table className="neuromorphic">
         <thead>
           <tr>
             <th>#</th>
             <th>Score</th>
             <th>Total</th>
-            <th>Percentage</th>
-            <th>Actions</th>
+            <th>Percent</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -102,14 +102,18 @@ export default function PointBasedClass({
                 %
               </td>
               <td>
-                <button onClick={() => deleteRow(index)}>Delete</button>
+                <button onClick={() => deleteRow(index)}>Del</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <button onClick={addRow}>Add Row</button>
-      <button onClick={addTenRows}>Add 10 Rows</button>
+      <button className="neuromorphic" onClick={addRow}>
+        Add Row
+      </button>
+      <button className="neuromorphic" onClick={addTenRows}>
+        Add 10 Rows
+      </button>
       <div>
         <p>Total Score: {totalScore}</p>
         <p>Total Max: {totalMax}</p>
