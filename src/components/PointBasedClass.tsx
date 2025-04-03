@@ -69,7 +69,7 @@ export default function PointBasedClass({
       <table className="neuromorphic">
         <thead>
           <tr>
-            <th>#</th>
+            <th></th>
             <th>Score</th>
             <th>Total</th>
             <th>Percent</th>

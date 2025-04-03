@@ -150,11 +150,12 @@ nav button {
 
 .table-container table th {
   padding: 10px;
+  font-weight: 500;
 }
 
 .table-container table td {
   padding: 0 10px;
-  font-size: 12pt;
+  font-size: 10pt;
   font-family: "DM Sans", sans-serif;
 
   box-shadow: inset -5px -5px 10px var(--shadow-light-color),

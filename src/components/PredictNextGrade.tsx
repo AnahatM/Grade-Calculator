@@ -51,70 +51,68 @@ export default function PredictNextGrade({
     calculatePredictedGrade() || {};
 
   return (
-    <div className="neuromorphic" style={{ padding: "20px" }}>
-      <div className="predict-next-grade neuromorphic-inset">
-        {/* Total Points */}
-        <h3>Predict Your Next Grade</h3>
-        <div className="total-points">
-          <label>
-            Total Points for Next Assignment:
-            <input
-              className="neuromorphic-inset"
-              type="number"
-              value={nextTotal}
-              onChange={(e) => setNextTotal(e.target.value)}
-            />
-          </label>
-        </div>
+    <div className="predict-next-grade neuromorphic">
+      {/* Total Points */}
+      <h2>Predict Your Next Grade</h2>
+      <div className="total-points">
+        <label>
+          Total Points for Next Assignment:
+          <input
+            className="neuromorphic-inset"
+            type="number"
+            value={nextTotal}
+            onChange={(e) => setNextTotal(e.target.value)}
+          />
+        </label>
+      </div>
 
-        {/* Predicted Points */}
+      {/* Predicted Points */}
+      <div>
+        <label>
+          If I score:
+          <input
+            className="neuromorphic-inset"
+            type="number"
+            value={predictedPoints}
+            onChange={(e) => setPredictedPoints(e.target.value)}
+          />
+          points, my grade will be:{" "}
+          <span className="neuromorphic-inset">{predictedGrade || "_"}</span>
+        </label>
+        {predictedGrade && (
+          <p>
+            Your grade will be {newTotalScore} points / {newTotalMax} points,
+            and your percentage grade will be {newPercentage?.toFixed(2)}%.
+          </p>
+        )}
+      </div>
+
+      {/* Calculate Desired Grade */}
+      <div>
         <div>
           <label>
-            If you score:
-            <input
-              className="neuromorphic-inset"
-              type="number"
-              value={predictedPoints}
-              onChange={(e) => setPredictedPoints(e.target.value)}
-            />
-            points, your grade will be:{" "}
-            <span className="neuromorphic-inset">{predictedGrade || "_"}</span>
+            I want to get a grade of:
+            <select
+              className="neuromorphic"
+              value={desiredGrade}
+              onChange={(e) => setDesiredGrade(e.target.value)}
+            >
+              <option value="">Select Grade</option>
+              {Object.keys(gradeScale).map((grade) => (
+                <option key={grade} value={grade}>
+                  {grade}
+                </option>
+              ))}
+            </select>
           </label>
-          {predictedGrade && (
-            <p>
-              Your grade will be {newTotalScore} points / {newTotalMax} points,
-              and your percentage grade will be {newPercentage?.toFixed(2)}%.
-            </p>
-          )}
         </div>
-
-        {/* Calculate Desired Grade */}
-        <div>
-          <div>
-            <label>
-              I want to get a grade of:
-              <select
-                className="neuromorphic"
-                value={desiredGrade}
-                onChange={(e) => setDesiredGrade(e.target.value)}
-              >
-                <option value="">Select Grade</option>
-                {Object.keys(gradeScale).map((grade) => (
-                  <option key={grade} value={grade}>
-                    {grade}
-                  </option>
-                ))}
-              </select>
-            </label>
-          </div>
-          {neededScore !== null && (
-            <p>
-              To achieve a {desiredGrade}, you need to score at least{" "}
-              {neededScore} points on your next assignment, or{" "}
-              {((neededScore / Number(nextTotal)) * 100).toFixed(2)}%
-            </p>
-          )}
-        </div>
+        {neededScore !== null && (
+          <p>
+            To achieve a {desiredGrade}, you need to score at least{" "}
+            {neededScore} points on your next assignment, or{" "}
+            {((neededScore / Number(nextTotal)) * 100).toFixed(2)}%
+          </p>
+        )}
       </div>
     </div>
   );
