@@ -62,3 +62,8 @@ input[type="number"] {
   appearance: textfield;
   -moz-appearance: textfield;
 }
+
+[data-theme="dark"] select {
+  background-color: var(--inverse-primary-color);
+  color: var(--primary-color);
+}
