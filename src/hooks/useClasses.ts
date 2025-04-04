@@ -13,10 +13,17 @@ export function useClasses() {
     return savedClasses ? (JSON.parse(savedClasses) as ClassData[]) : [];
   });
   const [activeClassIndex, setActiveClassIndex] = useState<number>(0);
+  const [activeClassData, setActiveClassData] = useState<ClassData | null>(
+    classes[0] || null
+  );
 
   useEffect(() => {
     localStorage.setItem("classes", JSON.stringify(classes));
   }, [classes]);
+
+  useEffect(() => {
+    setActiveClassData(classes[activeClassIndex] || null);
+  }, [activeClassIndex, classes]);
 
   const addClass = (
     name: string,
@@ -56,6 +63,7 @@ export function useClasses() {
   return {
     classes,
     activeClassIndex,
+    activeClassData,
     addClass,
     switchClass,
     updateClassData,

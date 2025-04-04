@@ -18,6 +18,7 @@
 
 .app main {
   max-width: 600px;
+  width: 100%; /* Added fixed width */
 }
 
 /* Navbar Styling */

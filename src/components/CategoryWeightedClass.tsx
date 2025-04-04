@@ -23,14 +23,18 @@ export default function CategoryWeightedClass({
   classData,
   updateClassData,
 }: CategoryWeightedClassProps) {
-  const [categories, setCategories] = useState<Category[]>(
-    classData.categories || []
-  );
-  const [rows, setRows] = useState<Row[]>(classData.data || []);
+  const [categories, setCategories] = useState(classData.categories || []);
+  const [rows, setRows] = useState(classData.data || []);
 
   useEffect(() => {
-    updateClassData({ categories, data: rows });
-  }, [categories, rows, updateClassData]);
+    if (
+      JSON.stringify(classData.categories) !== JSON.stringify(categories) ||
+      JSON.stringify(classData.data) !== JSON.stringify(rows)
+    ) {
+      setCategories(classData.categories || []);
+      setRows(classData.data || []);
+    }
+  }, [classData]);
 
   const parseWeight = (input: string): number => {
     if (input.includes("%")) {
@@ -43,8 +47,11 @@ export default function CategoryWeightedClass({
   };
 
   const addCategory = (name: string, weight: string): void => {
-    const parsedWeight = parseWeight(weight);
-    setCategories([...categories, { name, weight: parsedWeight * 100 }]);
+    const parsedWeight = parseFloat(weight);
+    const newCategory = { name, weight: parsedWeight };
+    const updatedCategories = [...categories, newCategory];
+    setCategories(updatedCategories);
+    updateClassData({ categories: updatedCategories, data: rows });
   };
 
   const editCategory = (index: number): void => {
@@ -61,28 +68,54 @@ export default function CategoryWeightedClass({
           : cat
       );
       setCategories(updatedCategories);
+      updateClassData({ categories: updatedCategories, data: rows });
     }
   };
 
   const deleteCategory = (index: number): void => {
     if (window.confirm("Are you sure you want to delete this category?")) {
-      setCategories(categories.filter((_, i) => i !== index));
+      const updatedCategories = categories.filter((_, i) => i !== index);
+      setCategories(updatedCategories);
+      updateClassData({ categories: updatedCategories, data: rows });
     }
   };
 
   const addRow = (): void => {
-    setRows([...rows, { score: "", total: "", category: "" }]);
+    const updatedRows = [...rows, { score: "", total: "", category: "" }];
+    setRows(updatedRows);
+    updateClassData({ categories, data: updatedRows });
   };
 
-  const updateRow = (index: number, field: keyof Row, value: string): void => {
-    const updatedRows = rows.map((row, i) =>
-      i === index ? { ...row, [field]: value } : row
-    );
-    setRows(updatedRows);
+  const addTenRows = (): void => {
+    const newRows = Array.from({ length: 10 }, () => ({
+      score: "",
+      total: "",
+      category: categories.length > 0 ? categories[0].name : "",
+    }));
+    setRows((prevRows) => {
+      const updatedRows = [...prevRows, ...newRows];
+      updateClassData({ categories, data: updatedRows });
+      return updatedRows;
+    });
+  };
+
+  const handleRowChange = (
+    index: number,
+    field: keyof Row,
+    value: string
+  ): void => {
+    setRows((prevRows) => {
+      const updatedRows = [...prevRows];
+      updatedRows[index] = { ...updatedRows[index], [field]: value };
+      updateClassData({ data: updatedRows, categories });
+      return updatedRows;
+    });
   };
 
   const deleteRow = (index: number): void => {
-    setRows(rows.filter((_, i) => i !== index));
+    const updatedRows = rows.filter((_, i) => i !== index);
+    setRows(updatedRows);
+    updateClassData({ categories, data: updatedRows });
   };
 
   const calculateTotals = (): { overallPercentage: string } => {
@@ -173,20 +206,26 @@ export default function CategoryWeightedClass({
                 <input
                   type="number"
                   value={row.score}
-                  onChange={(e) => updateRow(index, "score", e.target.value)}
+                  onChange={(e) =>
+                    handleRowChange(index, "score", e.target.value)
+                  }
                 />
               </td>
               <td>
                 <input
                   type="number"
                   value={row.total}
-                  onChange={(e) => updateRow(index, "total", e.target.value)}
+                  onChange={(e) =>
+                    handleRowChange(index, "total", e.target.value)
+                  }
                 />
               </td>
               <td>
                 <select
                   value={row.category}
-                  onChange={(e) => updateRow(index, "category", e.target.value)}
+                  onChange={(e) =>
+                    handleRowChange(index, "category", e.target.value)
+                  }
                 >
                   <option value="">Select Category</option>
                   {categories.map((cat, i) => (
@@ -206,17 +245,7 @@ export default function CategoryWeightedClass({
       <button className="neuromorphic" onClick={addRow}>
         Add Row
       </button>
-      <button
-        className="neuromorphic"
-        onClick={() => {
-          const newRows = Array(10).fill({
-            score: "",
-            total: "",
-            category: "",
-          });
-          setRows([...rows, ...newRows]);
-        }}
-      >
+      <button className="neuromorphic" onClick={addTenRows}>
         Add 10 Rows
       </button>
 

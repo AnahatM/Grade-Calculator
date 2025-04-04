@@ -14,32 +14,35 @@ export default function PointBasedClass({
   updateClassData,
   gradeScale,
 }: PointBasedClassProps) {
-  const [rows, setRows] = useState<{ score: string; total: string }[]>(
-    classData.data || []
-  );
+  const [rows, setRows] = useState(classData.data || []);
 
   useEffect(() => {
-    updateClassData({ data: rows });
-  }, [rows, updateClassData]);
+    if (classData.data !== rows) {
+      setRows(classData.data || []);
+    }
+  }, [classData]);
+
+  const handleRowChange = (
+    index: number,
+    field: "score" | "total",
+    value: string
+  ): void => {
+    const updatedRows = [...rows];
+    updatedRows[index][field] = value;
+    setRows(updatedRows);
+    updateClassData({ data: updatedRows });
+  };
 
   const addRow = (): void => {
     setRows([...rows, { score: "", total: "" }]);
   };
 
   const addTenRows = (): void => {
-    const newRows = Array(10).fill({ score: "", total: "" });
-    setRows([...rows, ...newRows]);
-  };
-
-  const updateRow = (
-    index: number,
-    field: "score" | "total",
-    value: string
-  ): void => {
-    const updatedRows = rows.map((row, i) =>
-      i === index ? { ...row, [field]: value } : row
-    );
-    setRows(updatedRows);
+    const newRows = Array.from({ length: 10 }, () => ({
+      score: "",
+      total: "",
+    }));
+    setRows((prevRows) => [...prevRows, ...newRows]);
   };
 
   const deleteRow = (index: number): void => {
@@ -84,14 +87,18 @@ export default function PointBasedClass({
                 <input
                   type="number"
                   value={row.score}
-                  onChange={(e) => updateRow(index, "score", e.target.value)}
+                  onChange={(e) =>
+                    handleRowChange(index, "score", e.target.value)
+                  }
                 />
               </td>
               <td>
                 <input
                   type="number"
                   value={row.total}
-                  onChange={(e) => updateRow(index, "total", e.target.value)}
+                  onChange={(e) =>
+                    handleRowChange(index, "total", e.target.value)
+                  }
                 />
               </td>
               <td>
