@@ -36,10 +36,8 @@ React-based Grade Calculator application that allows users to manage classes, ca
 
 The app features a modern and beautifully 3D user interface with support for both dark and light mode.
 
-<div style="display: flex; flex-wrap: wrap; gap: 10px;">
-    <img src="./assets/GradeCalculatorScreenshot-1.png" alt="Grade Calculator Screenshot 1" style="max-width: 500px; width: 100%; border-radius: 10px;">
-    <img src="./assets/GradeCalculatorScreenshot-5.png" alt="Grade Calculator Screenshot 2" style="max-width: 500px; width: 100%; border-radius: 10px;">
-    <img src="./assets/GradeCalculatorScreenshot-3.png" alt="Grade Calculator Screenshot 3" style="max-width: 500px; width: 100%; border-radius: 10px;">
-    <img src="./assets/GradeCalculatorScreenshot-4.png" alt="Grade Calculator Screenshot 4" style="max-width: 500px; width: 100%; border-radius: 10px;">
-    <img src="./assets/GradeCalculatorScreenshot-2.png" alt="Grade Calculator Screenshot 5" style="max-width: 500px; width: 100%; border-radius: 10px;">
-</div>
+<img src="./assets/GradeCalculatorScreenshot-1.png" alt="Grade Calculator Screenshot 1" width=450px>
+<img src="./assets/GradeCalculatorScreenshot-5.png" alt="Grade Calculator Screenshot 2" width=450px>
+<img src="./assets/GradeCalculatorScreenshot-3.png" alt="Grade Calculator Screenshot 3" width=450px>
+<img src="./assets/GradeCalculatorScreenshot-4.png" alt="Grade Calculator Screenshot 4" width=450px>
+<img src="./assets/GradeCalculatorScreenshot-2.png" alt="Grade Calculator Screenshot 5" width=450px>
