@@ -94,7 +94,7 @@ export default function PointBasedClass({
   const { totalScore, totalMax, percentage } = calculateTotals();
 
   return (
-    <div className="table-container neuromorphic">
+    <div className="table-container neuromorphic accent-border">
       <h2>Point-Based Class</h2>
       <table className="neuromorphic">
         <thead>
@@ -142,10 +142,10 @@ export default function PointBasedClass({
         </tbody>
       </table>
       <button className="neuromorphic" onClick={addAssignment}>
-        Add Assignment
+        Add Score
       </button>
       <button className="neuromorphic" onClick={addTenAssignments}>
-        Add 10 Assignments
+        Add 10 Scores
       </button>
       <p
         className="neuromorphic"

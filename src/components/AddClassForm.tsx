@@ -17,7 +17,7 @@ export default function AddClassForm({ addClass }: AddClassFormProps) {
   };
 
   return (
-    <div className="add-class-form neuromorphic">
+    <div className="add-class-form neuromorphic accent-border">
       <h2>Add a New Class</h2>
       <input
         type="text"

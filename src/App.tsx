@@ -90,6 +90,7 @@ export default function App() {
             )}
           <BackupRestore setClasses={setClasses} />
           <GradeScale gradeScale={gradeScale} setGradeScale={() => {}} />
+          <div style={{ height: "200px" }}></div>
         </main>
       </div>
     </>

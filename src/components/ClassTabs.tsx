@@ -14,7 +14,7 @@ export default function ClassTabs({
   deleteClass,
 }: ClassTabsProps) {
   return (
-    <div className="class-tabs neuromorphic">
+    <div className="class-tabs neuromorphic accent-border">
       <h2>Your Classes</h2>
       <div>
         {classes.map((cls, index) => (

@@ -52,7 +52,7 @@ export default function PredictNextGrade({
 
   return (
     <div
-      className="predict-next-grade neuromorphic"
+      className="predict-next-grade neuromorphic accent-border"
       style={{ marginBottom: "20px" }}
     >
       {/* Total Points */}

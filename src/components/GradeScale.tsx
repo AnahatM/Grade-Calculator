@@ -12,7 +12,7 @@ export default function GradeScale({
   };
 
   return (
-    <div className="grade-scale neuromorphic table-container">
+    <div className="grade-scale neuromorphic table-container accent-border">
       <h2>Letter Grades</h2>
       <table className="neuromorphic">
         <thead>

@@ -175,7 +175,7 @@ export default function CategoryWeightedClass({
   };
 
   return (
-    <div className="category-weighted-class table-container neuromorphic">
+    <div className="category-weighted-class table-container neuromorphic accent-border">
       <h2>Category-Weighted Class</h2>
 
       {/* Categories Section */}

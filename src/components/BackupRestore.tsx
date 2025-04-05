@@ -97,11 +97,11 @@ export default function BackupRestore({ setClasses }: BackupRestoreProps) {
   };
 
   return (
-    <div className="backup-restore neuromorphic">
+    <div className="backup-restore neuromorphic accent-border">
       <h2>Save and Load</h2>
       <div className="backup-restore-buttons">
         <button
-          className="neuromorphic btn-positive"
+          className="neuromorphic btn-accent"
           style={{ padding: "5px 10px" }}
           onClick={exportData}
         >

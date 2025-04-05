@@ -25,6 +25,11 @@
   color: var(--inverse-primary-color);
 }
 
+.btn-accent {
+  background-color: var(--accent-color);
+  color: var(--inverse-primary-color);
+}
+
 .app main button,
 .app main a,
 select {
@@ -42,6 +47,11 @@ select {
   width: 100%; /* Added fixed width */
 }
 
+.accent-border {
+  border-left: 5px solid var(--accent-color);
+  border-right: 5px solid var(--accent-color);
+}
+
 /* Navbar Styling */
 nav {
   width: 100%;
@@ -50,7 +60,7 @@ nav {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 60px;
 
   background: var(--accent-color);
   box-shadow: 0px 5px 10px var(--shadow-dark-color);
@@ -95,7 +105,7 @@ nav .nav-link {
 /* Add Class Section */
 .add-class-form {
   padding: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .add-class-form input {
@@ -117,7 +127,7 @@ nav .nav-link {
 /* Class Tab Switcher */
 .class-tabs {
   padding: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .class-tabs div {
@@ -170,7 +180,7 @@ nav .nav-link {
 /* Table */
 .table-container {
   padding: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .table-container table {
@@ -243,7 +253,7 @@ nav .nav-link {
 /* Category-Weighted Class Section */
 .category-weighted-class {
   padding: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .category-weighted-class ul {
@@ -289,7 +299,8 @@ nav .nav-link {
 .backup-restore,
 .grade-scale {
   padding: 20px;
-  margin-bottom: 20px;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 
 .backup-restore button,
