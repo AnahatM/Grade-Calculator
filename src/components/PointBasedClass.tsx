@@ -46,7 +46,9 @@ export default function PointBasedClass({
   };
 
   const deleteRow = (index: number): void => {
-    setRows(rows.filter((_, i) => i !== index));
+    const updatedRows = rows.filter((_, i) => i !== index);
+    setRows(updatedRows);
+    updateClassData({ data: updatedRows });
   };
 
   const calculateTotals = (): {
