@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   ClassData,
   Category,
@@ -21,26 +21,18 @@ export default function CategoryWeightedClass({
     classData.categories || []
   );
 
-  // Use a ref to track if this is the first render
-  const initialRender = React.useRef(true);
+  // Use a ref to track if we're handling changes internally
+  const isInternalChange = useRef(false);
 
   useEffect(() => {
-    // Only perform deep comparison after the initial render
-    if (initialRender.current) {
-      initialRender.current = false;
+    // Skip effect if changes came from within the component
+    if (isInternalChange.current) {
+      isInternalChange.current = false;
       return;
     }
 
-    const dataChanged =
-      JSON.stringify(classData.data) !== JSON.stringify(assignments);
-    const categoriesChanged =
-      JSON.stringify(classData.categories) !== JSON.stringify(categories);
-
-    // Only update state if the external data has actually changed
-    if (dataChanged || categoriesChanged) {
-      setCategories(classData.categories || []);
-      setAssignments((classData.data as CategoryWeightedAssignment[]) || []);
-    }
+    setCategories(classData.categories || []);
+    setAssignments((classData.data as CategoryWeightedAssignment[]) || []);
   }, [classData]);
 
   const parseWeight = (input: string): number => {
@@ -54,6 +46,7 @@ export default function CategoryWeightedClass({
   };
 
   const addCategory = (name: string, weight: string): void => {
+    isInternalChange.current = true;
     const parsedWeight = parseFloat(weight);
     const newCategory = { name, weight: parsedWeight };
     const updatedCategories = [...categories, newCategory];
@@ -62,6 +55,7 @@ export default function CategoryWeightedClass({
   };
 
   const editCategory = (index: number): void => {
+    isInternalChange.current = true;
     const newName = prompt("Enter new category name:", categories[index].name);
     const newWeight = prompt(
       "Enter new weight for the category (e.g., 25%, 0.25, or 25):",
@@ -80,6 +74,7 @@ export default function CategoryWeightedClass({
   };
 
   const deleteCategory = (index: number): void => {
+    isInternalChange.current = true;
     if (window.confirm("Are you sure you want to delete this category?")) {
       const updatedCategories = categories.filter((_, i) => i !== index);
       setCategories(updatedCategories);
@@ -88,6 +83,7 @@ export default function CategoryWeightedClass({
   };
 
   const addRow = (): void => {
+    isInternalChange.current = true;
     const updatedAssignments = [
       ...assignments,
       {
@@ -102,6 +98,7 @@ export default function CategoryWeightedClass({
   };
 
   const addTenRows = (): void => {
+    isInternalChange.current = true;
     const newAssignments = Array.from({ length: 10 }, () => ({
       name: "",
       score: 0,
@@ -121,6 +118,7 @@ export default function CategoryWeightedClass({
     field: keyof CategoryWeightedAssignment,
     value: string
   ): void => {
+    isInternalChange.current = true;
     setAssignments((prevAssignments) => {
       const updatedAssignments = [...prevAssignments];
       if (field === "score" || field === "total") {

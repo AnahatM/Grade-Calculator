@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ClassData, PointBasedAssignment } from "../hooks/useClasses";
 
 type PointBasedClassProps = {
@@ -16,10 +16,17 @@ export default function PointBasedClass({
     (classData.data as PointBasedAssignment[]) || []
   );
 
+  // Use a ref to track if we're handling changes internally
+  const isInternalChange = useRef(false);
+
   useEffect(() => {
-    if (classData.data !== rows) {
-      setRows((classData.data as PointBasedAssignment[]) || []);
+    // Skip effect if changes came from within the component
+    if (isInternalChange.current) {
+      isInternalChange.current = false;
+      return;
     }
+
+    setRows((classData.data as PointBasedAssignment[]) || []);
   }, [classData]);
 
   const handleRowChange = (
@@ -27,6 +34,7 @@ export default function PointBasedClass({
     field: "score" | "total",
     value: string
   ): void => {
+    isInternalChange.current = true;
     const updatedRows = [...rows];
     updatedRows[index][field] = Number(value);
     setRows(updatedRows);
@@ -34,6 +42,7 @@ export default function PointBasedClass({
   };
 
   const addAssignment = (): void => {
+    isInternalChange.current = true;
     const newAssignment: PointBasedAssignment = {
       name: "",
       score: 0,
@@ -43,15 +52,21 @@ export default function PointBasedClass({
   };
 
   const addTenAssignments = (): void => {
+    isInternalChange.current = true;
     const newAssignments = Array.from({ length: 10 }, () => ({
       name: "",
       score: 0,
       total: 0,
     }));
-    setRows((prevRows) => [...prevRows, ...newAssignments]);
+    setRows((prevRows) => {
+      const updatedRows = [...prevRows, ...newAssignments];
+      updateClassData({ data: updatedRows });
+      return updatedRows;
+    });
   };
 
   const deleteRow = (index: number): void => {
+    isInternalChange.current = true;
     const updatedRows = rows.filter((_, i) => i !== index);
     setRows(updatedRows);
     updateClassData({ data: updatedRows });
