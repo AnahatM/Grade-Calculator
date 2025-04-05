@@ -1,5 +1,5 @@
 type BackupRestoreProps = {
-  setClasses: (classes: any[]) => void;
+  setClasses: (classes: { name: string; grade: number }[]) => void;
 };
 
 export default function BackupRestore({ setClasses }: BackupRestoreProps) {
@@ -27,7 +27,7 @@ export default function BackupRestore({ setClasses }: BackupRestoreProps) {
             alert("Invalid JSON format: Expected an array of classes.");
           }
         } catch (error) {
-          alert("Invalid JSON file");
+          alert(`Invalid JSON file, Error: ${(error as Error).message}`);
         }
       };
       reader.readAsText(file);
