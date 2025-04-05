@@ -7,7 +7,10 @@
   --text-color: #181b2a;
   --primary-color: #ffffff;
   --inverse-primary-color: #181b2a;
-  --accent-color: #d62341;
+  --accent-color: #468fe2;
+  --positive-color: #4caf50;
+  --warning-color: #ff9800;
+  --negative-color: #d62341;
 }
 
 [data-theme="dark"] {
@@ -17,7 +20,7 @@
   --text-color: #dcdfe4;
   --primary-color: #e0e0e0;
   --inverse-primary-color: #181b2a;
-  --accent-color: #d62341;
+  --accent-color: #2377d6;
 }
 
 * {
