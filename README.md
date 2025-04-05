@@ -4,21 +4,15 @@ React-based Grade Calculator application that allows users to manage classes, ca
 
 <br />
 
+[![Deployed App](https://img.shields.io/badge/Deployed_App-Try_it_now-green)](https://anahatm.github.io/Grade-Calculator/)
 [![Anahat's Website](https://img.shields.io/badge/Developer_Website-AnahatMudgal.com-blue)](https://AnahatMudgal.com)
 
 ## Features
 
-- **Multiple Class Management**: Create and manage multiple classes with tabs for easy navigation
-- **Two Grading Systems**:
-  - Point-based: Simple score/total grading
-  - Category-weighted: Assignments grouped by weighted categories
-- **Grade Calculation**: Real-time calculation of overall grade percentage and letter grade
-- **Grade Prediction**: Predict the scores needed on future assignments to achieve target grades
-- **Customizable Grade Scale**: Define your own letter grade thresholds
-- **Data Backup & Restore**: Export and import your grade data
-- **Persistent Storage**: Automatic saving of data to local storage
-- **Clean, Modern UI**: Neuromorphic design with interactive elements
-- **Theme Support**: Toggle between light and dark modes
+- **Comprehensive Grade Management**: Manage multiple classes with both point-based and category-weighted grading systems, featuring real-time grade calculations and predictive analytics
+- **Customizable Experience**: Personalize your grade scales and utilize theme switching between light and dark modes
+- **Data Security & Flexibility**: Benefit from automatic local storage persistence with import/export functionality for data backup
+- **Intuitive Interface**: Navigate effortlessly through a clean, modern neuromorphic design with interactive elements
 
 ## Technologies Used
 
