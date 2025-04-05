@@ -6,6 +6,7 @@ import PointBasedClass from "./components/PointBasedClass.tsx";
 import CategoryWeightedClass from "./components/CategoryWeightedClass";
 import GradeScale from "./components/GradeScale";
 import PredictNextGrade from "./components/PredictNextGrade.tsx";
+import { PointBasedAssignment } from "./hooks/useClasses";
 
 import "./App.css";
 import Header from "./components/Header.tsx";
@@ -40,7 +41,7 @@ export default function App() {
 
   const { totalScore, totalMax } =
     classes.length > 0 && classes[activeClassIndex].type === "point-based"
-      ? classes[activeClassIndex].data.reduce(
+      ? (classes[activeClassIndex].data as PointBasedAssignment[]).reduce(
           (totals, row) => ({
             totalScore: totals.totalScore + Number(row.score || 0),
             totalMax: totals.totalMax + Number(row.total || 0),

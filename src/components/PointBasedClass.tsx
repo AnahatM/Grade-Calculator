@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
+import { ClassData, PointBasedAssignment } from "../hooks/useClasses";
 
-// Define types for props and rows
 type PointBasedClassProps = {
-  classData: {
-    data: { score: string; total: string }[];
-  };
-  updateClassData: (data: { data: { score: string; total: string }[] }) => void;
+  classData: ClassData;
+  updateClassData: (data: Partial<ClassData>) => void;
   gradeScale: Record<string, number>;
 };
 
@@ -14,11 +12,13 @@ export default function PointBasedClass({
   updateClassData,
   gradeScale,
 }: PointBasedClassProps) {
-  const [rows, setRows] = useState(classData.data || []);
+  const [rows, setRows] = useState<PointBasedAssignment[]>(
+    (classData.data as PointBasedAssignment[]) || []
+  );
 
   useEffect(() => {
     if (classData.data !== rows) {
-      setRows(classData.data || []);
+      setRows((classData.data as PointBasedAssignment[]) || []);
     }
   }, [classData]);
 
@@ -28,21 +28,27 @@ export default function PointBasedClass({
     value: string
   ): void => {
     const updatedRows = [...rows];
-    updatedRows[index][field] = value;
+    updatedRows[index][field] = Number(value);
     setRows(updatedRows);
     updateClassData({ data: updatedRows });
   };
 
-  const addRow = (): void => {
-    setRows([...rows, { score: "", total: "" }]);
+  const addAssignment = (): void => {
+    const newAssignment: PointBasedAssignment = {
+      name: "",
+      score: 0,
+      total: 0,
+    };
+    updateClassData({ data: [...rows, newAssignment] });
   };
 
-  const addTenRows = (): void => {
-    const newRows = Array.from({ length: 10 }, () => ({
-      score: "",
-      total: "",
+  const addTenAssignments = (): void => {
+    const newAssignments = Array.from({ length: 10 }, () => ({
+      name: "",
+      score: 0,
+      total: 0,
     }));
-    setRows((prevRows) => [...prevRows, ...newRows]);
+    setRows((prevRows) => [...prevRows, ...newAssignments]);
   };
 
   const deleteRow = (index: number): void => {
@@ -116,11 +122,11 @@ export default function PointBasedClass({
           ))}
         </tbody>
       </table>
-      <button className="neuromorphic" onClick={addRow}>
-        Add Row
+      <button className="neuromorphic" onClick={addAssignment}>
+        Add Assignment
       </button>
-      <button className="neuromorphic" onClick={addTenRows}>
-        Add 10 Rows
+      <button className="neuromorphic" onClick={addTenAssignments}>
+        Add 10 Assignments
       </button>
       <p
         className="neuromorphic"

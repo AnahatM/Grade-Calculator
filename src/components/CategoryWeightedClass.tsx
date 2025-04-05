@@ -1,38 +1,45 @@
-import { useState, useEffect } from "react";
-
-type Category = {
-  name: string;
-  weight: number;
-};
-
-type Row = {
-  score: string;
-  total: string;
-  category: string;
-};
+import React, { useState, useEffect } from "react";
+import {
+  ClassData,
+  Category,
+  CategoryWeightedAssignment,
+} from "../hooks/useClasses";
 
 type CategoryWeightedClassProps = {
-  classData: {
-    categories: Category[];
-    data: Row[];
-  };
-  updateClassData: (data: { categories: Category[]; data: Row[] }) => void;
+  classData: ClassData;
+  updateClassData: (data: Partial<ClassData>) => void;
 };
 
 export default function CategoryWeightedClass({
   classData,
   updateClassData,
 }: CategoryWeightedClassProps) {
-  const [categories, setCategories] = useState(classData.categories || []);
-  const [rows, setRows] = useState(classData.data || []);
+  const [assignments, setAssignments] = useState<CategoryWeightedAssignment[]>(
+    (classData.data as CategoryWeightedAssignment[]) || []
+  );
+  const [categories, setCategories] = useState<Category[]>(
+    classData.categories || []
+  );
+
+  // Use a ref to track if this is the first render
+  const initialRender = React.useRef(true);
 
   useEffect(() => {
-    if (
-      JSON.stringify(classData.categories) !== JSON.stringify(categories) ||
-      JSON.stringify(classData.data) !== JSON.stringify(rows)
-    ) {
+    // Only perform deep comparison after the initial render
+    if (initialRender.current) {
+      initialRender.current = false;
+      return;
+    }
+
+    const dataChanged =
+      JSON.stringify(classData.data) !== JSON.stringify(assignments);
+    const categoriesChanged =
+      JSON.stringify(classData.categories) !== JSON.stringify(categories);
+
+    // Only update state if the external data has actually changed
+    if (dataChanged || categoriesChanged) {
       setCategories(classData.categories || []);
-      setRows(classData.data || []);
+      setAssignments((classData.data as CategoryWeightedAssignment[]) || []);
     }
   }, [classData]);
 
@@ -51,7 +58,7 @@ export default function CategoryWeightedClass({
     const newCategory = { name, weight: parsedWeight };
     const updatedCategories = [...categories, newCategory];
     setCategories(updatedCategories);
-    updateClassData({ categories: updatedCategories, data: rows });
+    updateClassData({ categories: updatedCategories });
   };
 
   const editCategory = (index: number): void => {
@@ -68,7 +75,7 @@ export default function CategoryWeightedClass({
           : cat
       );
       setCategories(updatedCategories);
-      updateClassData({ categories: updatedCategories, data: rows });
+      updateClassData({ categories: updatedCategories });
     }
   };
 
@@ -76,57 +83,79 @@ export default function CategoryWeightedClass({
     if (window.confirm("Are you sure you want to delete this category?")) {
       const updatedCategories = categories.filter((_, i) => i !== index);
       setCategories(updatedCategories);
-      updateClassData({ categories: updatedCategories, data: rows });
+      updateClassData({ categories: updatedCategories });
     }
   };
 
   const addRow = (): void => {
-    const updatedRows = [...rows, { score: "", total: "", category: "" }];
-    setRows(updatedRows);
-    updateClassData({ categories, data: updatedRows });
+    const updatedAssignments = [
+      ...assignments,
+      {
+        name: "",
+        score: 0,
+        total: 0,
+        category: categories.length > 0 ? categories[0].name : "",
+      } as CategoryWeightedAssignment,
+    ];
+    setAssignments(updatedAssignments);
+    updateClassData({ data: updatedAssignments });
   };
 
   const addTenRows = (): void => {
-    const newRows = Array.from({ length: 10 }, () => ({
-      score: "",
-      total: "",
+    const newAssignments = Array.from({ length: 10 }, () => ({
+      name: "",
+      score: 0,
+      total: 0,
       category: categories.length > 0 ? categories[0].name : "",
-    }));
-    setRows((prevRows) => {
-      const updatedRows = [...prevRows, ...newRows];
-      updateClassData({ categories, data: updatedRows });
-      return updatedRows;
+    })) as CategoryWeightedAssignment[];
+
+    setAssignments((prevAssignments) => {
+      const updatedAssignments = [...prevAssignments, ...newAssignments];
+      updateClassData({ data: updatedAssignments });
+      return updatedAssignments;
     });
   };
 
   const handleRowChange = (
     index: number,
-    field: keyof Row,
+    field: keyof CategoryWeightedAssignment,
     value: string
   ): void => {
-    setRows((prevRows) => {
-      const updatedRows = [...prevRows];
-      updatedRows[index] = { ...updatedRows[index], [field]: value };
-      updateClassData({ data: updatedRows, categories });
-      return updatedRows;
+    setAssignments((prevAssignments) => {
+      const updatedAssignments = [...prevAssignments];
+      if (field === "score" || field === "total") {
+        updatedAssignments[index] = {
+          ...updatedAssignments[index],
+          [field]: Number(value),
+        };
+      } else {
+        updatedAssignments[index] = {
+          ...updatedAssignments[index],
+          [field]: value,
+        };
+      }
+      updateClassData({ data: updatedAssignments });
+      return updatedAssignments;
     });
   };
 
   const deleteRow = (index: number): void => {
-    const updatedRows = rows.filter((_, i) => i !== index);
-    setRows(updatedRows);
-    updateClassData({ categories, data: updatedRows });
+    const updatedAssignments = assignments.filter((_, i) => i !== index);
+    setAssignments(updatedAssignments);
+    updateClassData({ data: updatedAssignments });
   };
 
   const calculateTotals = (): { overallPercentage: string } => {
     const totalWeightedScore = categories.reduce((sum, category) => {
-      const categoryRows = rows.filter((row) => row.category === category.name);
-      const totalScore = categoryRows.reduce(
-        (sum, row) => sum + Number(row.score || 0),
+      const categoryAssignments = assignments.filter(
+        (assignment) => assignment.category === category.name
+      );
+      const totalScore = categoryAssignments.reduce(
+        (sum, assignment) => sum + Number(assignment.score || 0),
         0
       );
-      const totalMax = categoryRows.reduce(
-        (sum, row) => sum + Number(row.total || 0),
+      const totalMax = categoryAssignments.reduce(
+        (sum, assignment) => sum + Number(assignment.total || 0),
         0
       );
       const weight = category.weight / 100;
@@ -199,13 +228,13 @@ export default function CategoryWeightedClass({
           </tr>
         </thead>
         <tbody>
-          {rows.map((row, index) => (
+          {assignments.map((assignment, index) => (
             <tr key={index}>
               <td>{index + 1}</td>
               <td>
                 <input
                   type="number"
-                  value={row.score}
+                  value={assignment.score}
                   onChange={(e) =>
                     handleRowChange(index, "score", e.target.value)
                   }
@@ -214,7 +243,7 @@ export default function CategoryWeightedClass({
               <td>
                 <input
                   type="number"
-                  value={row.total}
+                  value={assignment.total}
                   onChange={(e) =>
                     handleRowChange(index, "total", e.target.value)
                   }
@@ -222,7 +251,7 @@ export default function CategoryWeightedClass({
               </td>
               <td>
                 <select
-                  value={row.category}
+                  value={assignment.category}
                   onChange={(e) =>
                     handleRowChange(index, "category", e.target.value)
                   }

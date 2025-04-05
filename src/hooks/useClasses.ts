@@ -1,10 +1,29 @@
 import { useState, useEffect } from "react";
 
-type ClassData = {
+// Point-based assignment type
+export interface PointBasedAssignment {
+  name: string;
+  score: number;
+  total: number;
+  date?: string;
+}
+
+// Category for weighted classes
+export interface Category {
+  name: string;
+  weight: number;
+}
+
+// Category-weighted assignment type
+export interface CategoryWeightedAssignment extends PointBasedAssignment {
+  category: string;
+}
+
+export type ClassData = {
   name: string;
   type: "point-based" | "category-weighted";
-  data: any[];
-  categories: any[];
+  data: PointBasedAssignment[] | CategoryWeightedAssignment[];
+  categories: Category[];
 };
 
 export function useClasses() {

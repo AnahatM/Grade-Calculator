@@ -1,10 +1,18 @@
+import { type ClassData } from "../hooks/useClasses";
+
 type BackupRestoreProps = {
-  setClasses: (classes: { name: string; grade: number }[]) => void;
+  setClasses: React.Dispatch<React.SetStateAction<ClassData[]>>;
 };
 
 export default function BackupRestore({ setClasses }: BackupRestoreProps) {
   const exportData = () => {
-    const dataStr = JSON.stringify([], null, 2); // Replace with actual data
+    const dataStr = JSON.stringify(
+      localStorage.getItem("classes")
+        ? JSON.parse(localStorage.getItem("classes")!)
+        : [],
+      null,
+      2
+    );
     const blob = new Blob([dataStr], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
@@ -22,6 +30,7 @@ export default function BackupRestore({ setClasses }: BackupRestoreProps) {
         try {
           const importedClasses = JSON.parse(e.target?.result as string);
           if (Array.isArray(importedClasses)) {
+            // Validate that imported data matches the ClassData structure
             setClasses(importedClasses);
           } else {
             alert("Invalid JSON format: Expected an array of classes.");
