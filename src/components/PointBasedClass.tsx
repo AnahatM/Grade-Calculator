@@ -48,7 +48,11 @@ export default function PointBasedClass({
       score: 0,
       total: 0,
     };
-    updateClassData({ data: [...rows, newAssignment] });
+    setRows((prevRows) => {
+      const updatedRows = [...prevRows, newAssignment];
+      updateClassData({ data: updatedRows });
+      return updatedRows;
+    });
   };
 
   const addTenAssignments = (): void => {
