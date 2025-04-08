@@ -8,11 +8,13 @@ import {
 type CategoryWeightedClassProps = {
   classData: ClassData;
   updateClassData: (data: Partial<ClassData>) => void;
+  gradeScale: Record<string, number>;
 };
 
 export default function CategoryWeightedClass({
   classData,
   updateClassData,
+  gradeScale,
 }: CategoryWeightedClassProps) {
   const [assignments, setAssignments] = useState<CategoryWeightedAssignment[]>(
     (classData.data as CategoryWeightedAssignment[]) || []
@@ -165,14 +167,6 @@ export default function CategoryWeightedClass({
   };
 
   const { overallPercentage } = calculateTotals();
-
-  const gradeScale: { [grade: string]: number } = {
-    A: 90,
-    B: 80,
-    C: 70,
-    D: 60,
-    F: 0,
-  };
 
   return (
     <div className="category-weighted-class table-container neuromorphic accent-border">

@@ -76,6 +76,7 @@ export default function App() {
                 <CategoryWeightedClass
                   classData={classes[activeClassIndex]}
                   updateClassData={updateClassData}
+                  gradeScale={gradeScale}
                 />
               )}
             </div>
