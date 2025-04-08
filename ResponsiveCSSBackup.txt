@@ -1,0 +1,529 @@
+.neuromorphic {
+  box-shadow: -5px -5px 10px var(--shadow-light-color),
+    5px 5px 10px var(--shadow-dark-color);
+  border-radius: 10px;
+}
+
+.neuromorphic-inset {
+  box-shadow: inset -5px -5px 10px var(--shadow-light-color),
+    inset 5px 5px 10px var(--shadow-dark-color);
+  border-radius: 10px;
+}
+
+.btn-positive {
+  background-color: var(--positive-color);
+  color: var(--inverse-primary-color);
+}
+
+.btn-negative {
+  background-color: var(--negative-color);
+  color: var(--inverse-primary-color);
+}
+
+.btn-warning {
+  background-color: var(--warning-color);
+  color: var(--inverse-primary-color);
+}
+
+.btn-accent {
+  background-color: var(--accent-color);
+  color: var(--inverse-primary-color);
+}
+
+.app main button,
+.app main a,
+select {
+  cursor: pointer;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0 20px; /* Add padding to the app container */
+}
+
+.app main {
+  max-width: 600px;
+  width: 100%;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.accent-border {
+  border-left: 5px solid var(--accent-color);
+  border-right: 5px solid var(--accent-color);
+}
+
+/* Navbar Styling */
+nav {
+  width: 100%;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 60px;
+
+  background: var(--accent-color);
+  box-shadow: 0px 5px 10px var(--shadow-dark-color);
+}
+
+nav header h1 {
+  margin-bottom: 0;
+
+  font-size: 24pt;
+  color: var(--text-color);
+}
+
+nav header p {
+  margin-bottom: 5px;
+
+  font-size: 12pt;
+  color: var(--inverse-primary-color);
+  font-style: italic;
+}
+
+nav button {
+  padding: 5px 10px;
+  border-radius: 25px;
+
+  background: var(--primary-color);
+  color: var(--inverse-primary-color);
+  font-size: 12pt;
+  cursor: pointer;
+}
+
+nav .nav-link {
+  padding: 5px 10px;
+  border-radius: 25px;
+
+  background: var(--primary-color);
+  color: var(--inverse-primary-color);
+  font-size: 12pt;
+  margin: 0 5px;
+  text-decoration: none;
+}
+
+/* Add Class Section */
+.add-class-form {
+  padding: 20px;
+  margin-bottom: 40px;
+}
+
+.add-class-form input {
+  padding: 5px 10px;
+}
+
+.add-class-form select {
+  padding: 5px 10px;
+  margin-left: 10px;
+}
+
+.add-class-form button {
+  padding: 5px 10px;
+  margin-left: 10px;
+  background-color: var(--accent-color);
+  color: var(--inverse-primary-color);
+}
+
+/* Class Tab Switcher */
+.class-tabs {
+  padding: 20px;
+  margin-bottom: 40px;
+}
+
+.class-tabs div {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+  align-items: center;
+}
+
+.class-tabs div div {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.class-tabs div div button {
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 10pt;
+  width: 100%;
+  background: var(--primary-color);
+  color: var(--inverse-primary-color);
+  transition: all 0.15s ease-out;
+
+  &:hover {
+    background: var(--accent-color);
+  }
+}
+
+.class-tabs div div button.active {
+  background-color: var(--accent-color);
+}
+
+.class-tabs div div span {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.class-tabs div div span button {
+  font-size: 8pt;
+  font-weight: lighter;
+  text-transform: uppercase;
+}
+
+/* Table */
+.table-container {
+  padding: 20px;
+  margin-bottom: 40px;
+  overflow-x: auto; /* Allow scrolling for extra-wide tables */
+}
+
+.table-container table {
+  padding: 10px;
+  margin: 10px 0;
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  table-layout: fixed; /* Fixed layout for better control */
+}
+
+.table-container table th,
+.table-container table td {
+  max-width: 150px; /* Maximum width for columns */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Show ellipsis for overflowed text */
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.table-container table th {
+  padding: 10px;
+  font-weight: 500;
+}
+
+.table-container table td {
+  padding: 0 10px;
+  font-size: 10pt;
+  font-family: "DM Sans", sans-serif;
+
+  box-shadow: inset -5px -5px 10px var(--shadow-light-color),
+    inset 5px 5px 10px var(--shadow-dark-color);
+  border-radius: 0px;
+}
+
+.table-container table input,
+.table-container table select {
+  width: 100%; /* Make inputs fill their cells */
+  max-width: 100%;
+}
+
+.table-container button {
+  padding: 5px 10px;
+  margin: 5px 0;
+  margin-right: 5px;
+  margin-bottom: 10px;
+
+  background-color: var(--accent-color);
+  color: var(--inverse-primary-color);
+}
+
+.table-container td button {
+  padding: 2px 5px;
+  font-size: 8pt;
+  font-weight: lighter;
+  text-transform: uppercase;
+  text-decoration: underline;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--text-color);
+}
+
+.table-container p {
+  padding: 5px 10px;
+  margin: 5px 0;
+  width: fit-content;
+  margin-bottom: 15px;
+}
+
+/* Predict Next Grade Section */
+.predict-next-grade {
+  padding: 20px;
+}
+
+.predict-next-grade input {
+  padding: 5px 10px;
+  margin: 10px;
+}
+
+.predict-next-grade select {
+  padding: 5px 10px;
+  margin: 10px;
+}
+
+/* Category-Weighted Class Section */
+.category-weighted-class {
+  padding: 20px;
+  margin-bottom: 40px;
+}
+
+.category-weighted-class ul {
+  padding: 10px;
+  margin: 10px 0;
+  list-style: none;
+}
+
+.category-weighted-class ul li {
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category-weighted-class ul li button {
+  padding: 2px 5px;
+  font-size: 8pt;
+  font-weight: lighter;
+  text-transform: uppercase;
+  text-decoration: underline;
+  border-radius: 5px;
+  background: transparent;
+}
+
+.category-weighted-class button {
+  padding: 5px 10px;
+  margin: 5px 0;
+  margin-right: 5px;
+  margin-bottom: 10px;
+  background-color: var(--accent-color);
+  color: var(--inverse-primary-color);
+}
+
+.category-weighted-class p {
+  padding: 5px 10px;
+  margin: 5px 0;
+  width: fit-content;
+  margin-bottom: 15px;
+}
+
+/* Backup-Restore and Grade-Scale Sections */
+.backup-restore,
+.grade-scale {
+  padding: 20px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.backup-restore button,
+.grade-scale input {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.backup-restore input {
+  padding: 5px 10px;
+}
+
+/* JSON Editor Popup Styles */
+.json-editor-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.json-editor-popup {
+  background: var(--background-color);
+  padding: 20px;
+  width: 80%;
+  max-width: 800px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--text-color);
+  box-shadow: none;
+}
+
+.json-editor-popup h3 {
+  margin-bottom: 15px;
+}
+
+.json-editor-container {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.copy-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.copy-button:hover {
+  background-color: var(--positive-color);
+  transform: scale(1.05);
+}
+
+.json-editor-popup textarea {
+  width: 100%;
+  padding: 10px;
+  padding-top: 40px;
+  font-family: monospace;
+  font-size: 14px;
+  color: var(--text-color);
+  background: transparent;
+  resize: vertical;
+  min-height: 200px;
+  overflow-y: auto;
+}
+
+.json-error {
+  color: var(--negative-color);
+  margin-bottom: 15px;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: rgba(214, 35, 65, 0.1);
+}
+
+.json-editor-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.json-editor-actions button {
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+.backup-restore-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.backup-restore button {
+  margin-top: 0;
+}
+
+/* Responsive styles */
+@media (max-width: 700px) {
+  /* Navbar adjustments for small screens */
+  nav {
+    padding: 8px 15px;
+    margin-bottom: 30px;
+  }
+
+  nav header h1 {
+    font-size: 18pt;
+  }
+
+  nav header p {
+    font-size: 10pt;
+  }
+
+  nav span {
+    display: flex;
+    gap: 5px;
+  }
+
+  nav button,
+  nav .nav-link {
+    font-size: 10pt;
+    padding: 4px 8px;
+    white-space: nowrap;
+  }
+
+  /* Adjust container padding */
+  .app {
+    padding: 0 10px;
+  }
+
+  /* Make tables more compact */
+  .table-container {
+    padding: 15px 10px;
+  }
+
+  .table-container table th,
+  .table-container table td {
+    padding: 5px;
+    max-width: 100px;
+  }
+
+  .table-container table th {
+    font-size: 10pt;
+  }
+
+  .table-container table td {
+    font-size: 9pt;
+  }
+
+  /* Adjust form elements for small screens */
+  .add-class-form {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .add-class-form input,
+  .add-class-form select,
+  .add-class-form button {
+    margin: 5px 0;
+    width: 100%;
+  }
+
+  /* Adjust section spacing */
+  .class-tabs,
+  .category-weighted-class,
+  .predict-next-grade,
+  .backup-restore,
+  .grade-scale {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+}
+
+/* Extra small screen adjustments */
+@media (max-width: 400px) {
+  nav {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+
+  nav header h1 {
+    font-size: 16pt;
+  }
+
+  .table-container table th,
+  .table-container table td {
+    max-width: 80px;
+    font-size: 8pt;
+    padding: 3px;
+  }
+}

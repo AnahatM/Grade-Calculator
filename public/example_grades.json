@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Example Point Class",
+    "type": "point-based",
+    "data": [
+      {
+        "name": "",
+        "score": 52,
+        "total": 61
+      },
+      {
+        "name": "",
+        "score": 55,
+        "total": 74
+      },
+      {
+        "name": "",
+        "score": 98,
+        "total": 100
+      },
+      {
+        "name": "",
+        "score": 80,
+        "total": 100
+      },
+      {
+        "name": "",
+        "score": 20,
+        "total": 20
+      }
+    ],
+    "categories": []
+  },
+  {
+    "name": "Example Category Class",
+    "type": "category-weighted",
+    "data": [
+      {
+        "name": "",
+        "score": 39,
+        "total": 39,
+        "category": "Check-in"
+      },
+      {
+        "name": "",
+        "score": 1,
+        "total": 1,
+        "category": "Interpersonal"
+      },
+      {
+        "name": "",
+        "score": 118,
+        "total": 118,
+        "category": "Interpret"
+      },
+      {
+        "name": "",
+        "score": 16,
+        "total": 16,
+        "category": "Present"
+      }
+    ],
+    "categories": [
+      {
+        "name": "Check-in",
+        "weight": 25
+      },
+      {
+        "name": "Interpersonal",
+        "weight": 25
+      },
+      {
+        "name": "Interpret",
+        "weight": 25
+      },
+      {
+        "name": "Present",
+        "weight": 25
+      }
+    ]
+  }
+]

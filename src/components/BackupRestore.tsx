@@ -27,7 +27,7 @@ export default function BackupRestore({ setClasses }: BackupRestoreProps) {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "grade_calculator_data.json";
+    link.download = "grade_calculator_data.gradesfile";
     link.click();
     URL.revokeObjectURL(url);
   };
@@ -46,10 +46,23 @@ export default function BackupRestore({ setClasses }: BackupRestoreProps) {
             alert("Invalid JSON format: Expected an array of classes.");
           }
         } catch (error) {
-          alert(`Invalid JSON file, Error: ${(error as Error).message}`);
+          alert(`Invalid file format, Error: ${(error as Error).message}`);
         }
       };
       reader.readAsText(file);
+    }
+  };
+
+  const loadExampleData = async () => {
+    try {
+      const response = await fetch("./example_grades.json");
+      if (!response.ok) {
+        throw new Error(`Failed to fetch example data: ${response.statusText}`);
+      }
+      const exampleData = await response.json();
+      setClasses(exampleData);
+    } catch (error) {
+      alert(`Error loading example data: ${(error as Error).message}`);
     }
   };
 
@@ -108,18 +121,41 @@ export default function BackupRestore({ setClasses }: BackupRestoreProps) {
           Export
         </button>
         <button
-          className="neuromorphic"
+          className="neuromorphic btn-accent"
           style={{ padding: "5px 10px" }}
           onClick={openJsonEditor}
         >
           View / Edit Data
         </button>
-        <input
-          type="file"
-          accept="application/json"
-          onChange={importData}
-          className="neuromorphic-inset"
-        />
+      </div>
+
+      <div style={{ marginTop: "15px" }}>
+        <label
+          htmlFor="file-upload"
+          style={{ display: "block", marginBottom: "5px", marginTop: "20px" }}
+        >
+          Import a .gradesfile to load your saved data:
+        </label>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <input
+            id="file-upload"
+            type="file"
+            accept=".gradesfile,application/json"
+            onChange={importData}
+            className="neuromorphic-inset"
+          />
+        </div>
+        <button
+          className="neuromorphic"
+          style={{
+            padding: "5px 10px",
+            marginTop: "20px",
+            whiteSpace: "nowrap",
+          }}
+          onClick={loadExampleData}
+        >
+          Add example data
+        </button>
       </div>
 
       {showJsonEditor && (
