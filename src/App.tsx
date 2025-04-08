@@ -7,6 +7,7 @@ import CategoryWeightedClass from "./components/CategoryWeightedClass";
 import GradeScale from "./components/GradeScale";
 import PredictNextGrade from "./components/PredictNextGrade.tsx";
 import { PointBasedAssignment } from "./hooks/useClasses";
+import { useState, useEffect } from "react";
 
 import "./App.css";
 import Header from "./components/Header.tsx";
@@ -23,7 +24,7 @@ export default function App() {
     setClasses,
   } = useClasses();
 
-  const gradeScale = {
+  const defaultGradeScale = {
     "A+": 97,
     A: 93,
     "A-": 90,
@@ -38,6 +39,17 @@ export default function App() {
     "D-": 60,
     F: 0,
   };
+
+  // State to keep track of the grade scale
+  const [gradeScale, setGradeScale] = useState<Record<string, number>>(() => {
+    const savedScale = localStorage.getItem("gradeScale");
+    return savedScale ? JSON.parse(savedScale) : defaultGradeScale;
+  });
+
+  // Save grade scale to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("gradeScale", JSON.stringify(gradeScale));
+  }, [gradeScale]);
 
   const { totalScore, totalMax } =
     classes.length > 0 && classes[activeClassIndex].type === "point-based"
@@ -90,7 +102,7 @@ export default function App() {
               />
             )}
           <BackupRestore setClasses={setClasses} />
-          <GradeScale gradeScale={gradeScale} setGradeScale={() => {}} />
+          <GradeScale gradeScale={gradeScale} setGradeScale={setGradeScale} />
           <div style={{ height: "200px" }}></div>
         </main>
       </div>

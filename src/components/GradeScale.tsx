@@ -11,6 +11,28 @@ export default function GradeScale({
     setGradeScale({ ...gradeScale, [grade]: minPercentage });
   };
 
+  const resetToDefaults = (): void => {
+    const defaultGradeScale = {
+      "A+": 97,
+      A: 93,
+      "A-": 90,
+      "B+": 87,
+      B: 83,
+      "B-": 80,
+      "C+": 77,
+      C: 73,
+      "C-": 70,
+      "D+": 67,
+      D: 63,
+      "D-": 60,
+      F: 0,
+    };
+
+    if (window.confirm("Reset grade thresholds to default values?")) {
+      setGradeScale(defaultGradeScale);
+    }
+  };
+
   return (
     <div className="grade-scale neuromorphic table-container accent-border">
       <h2>Letter Grades</h2>
@@ -42,6 +64,13 @@ export default function GradeScale({
       >
         You can adjust the above thresholds for letter grades.
       </p>
+      <button
+        onClick={resetToDefaults}
+        className="neuromorphic btn-warning"
+        style={{ marginTop: "5px", marginBottom: "15px" }}
+      >
+        Reset to Default Values
+      </button>
     </div>
   );
 }
