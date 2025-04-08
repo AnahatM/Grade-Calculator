@@ -6,7 +6,11 @@ import PointBasedClass from "./components/PointBasedClass.tsx";
 import CategoryWeightedClass from "./components/CategoryWeightedClass";
 import GradeScale from "./components/GradeScale";
 import PredictNextGrade from "./components/PredictNextGrade.tsx";
-import { PointBasedAssignment } from "./hooks/useClasses";
+import PredictCategoryNextGrade from "./components/PredictCategoryNextGrade.tsx";
+import {
+  PointBasedAssignment,
+  CategoryWeightedAssignment,
+} from "./hooks/useClasses";
 import { useState, useEffect } from "react";
 
 import "./App.css";
@@ -62,6 +66,33 @@ export default function App() {
         )
       : { totalScore: 0, totalMax: 0 };
 
+  // Calculate category scores for category-weighted classes
+  const calculateCategoryScores = () => {
+    if (
+      classes.length === 0 ||
+      classes[activeClassIndex].type !== "category-weighted"
+    ) {
+      return {};
+    }
+
+    const assignments = classes[activeClassIndex]
+      .data as CategoryWeightedAssignment[];
+    const categoryScores: Record<string, { score: number; total: number }> = {};
+
+    assignments.forEach((assignment) => {
+      const category = assignment.category;
+      if (!categoryScores[category]) {
+        categoryScores[category] = { score: 0, total: 0 };
+      }
+      categoryScores[category].score += Number(assignment.score || 0);
+      categoryScores[category].total += Number(assignment.total || 0);
+    });
+
+    return categoryScores;
+  };
+
+  const categoryScores = calculateCategoryScores();
+
   return (
     <>
       <Header />
@@ -93,14 +124,24 @@ export default function App() {
               )}
             </div>
           )}
-          {classes.length > 0 &&
-            classes[activeClassIndex].type === "point-based" && (
-              <PredictNextGrade
-                totalScore={totalScore}
-                totalMax={totalMax}
-                gradeScale={gradeScale}
-              />
-            )}
+          {classes.length > 0 && (
+            <>
+              {classes[activeClassIndex].type === "point-based" && (
+                <PredictNextGrade
+                  totalScore={totalScore}
+                  totalMax={totalMax}
+                  gradeScale={gradeScale}
+                />
+              )}
+              {classes[activeClassIndex].type === "category-weighted" && (
+                <PredictCategoryNextGrade
+                  categories={classes[activeClassIndex].categories}
+                  categoryScores={categoryScores}
+                  gradeScale={gradeScale}
+                />
+              )}
+            </>
+          )}
           <BackupRestore setClasses={setClasses} />
           <GradeScale gradeScale={gradeScale} setGradeScale={setGradeScale} />
           <div style={{ height: "200px" }}></div>
