@@ -7,6 +7,7 @@ import CategoryWeightedClass from "./components/CategoryWeightedClass";
 import GradeScale from "./components/GradeScale";
 import PredictNextGrade from "./components/PredictNextGrade.tsx";
 import PredictCategoryNextGrade from "./components/PredictCategoryNextGrade.tsx";
+import TermFinalGradeCalculator from "./components/TermFinalGradeCalculator.tsx";
 import {
   PointBasedAssignment,
   CategoryWeightedAssignment,
@@ -140,6 +141,7 @@ export default function App() {
                   gradeScale={gradeScale}
                 />
               )}
+              <TermFinalGradeCalculator gradeScale={gradeScale} />
             </>
           )}
           <BackupRestore setClasses={setClasses} />

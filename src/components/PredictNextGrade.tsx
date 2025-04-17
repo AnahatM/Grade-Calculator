@@ -65,6 +65,7 @@ export default function PredictNextGrade({
             type="number"
             value={nextTotal}
             onChange={(e) => setNextTotal(e.target.value)}
+            placeholder="e.g. 100"
           />
         </label>
       </div>
@@ -78,6 +79,7 @@ export default function PredictNextGrade({
             type="number"
             value={predictedPoints}
             onChange={(e) => setPredictedPoints(e.target.value)}
+            placeholder="e.g. 85"
           />
           points, my grade will be:{" "}
           <span className="neuromorphic-inset">{predictedGrade || "_"}</span>
